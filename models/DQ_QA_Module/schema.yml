@@ -1,0 +1,12 @@
+version: 2
+models:
+  - name: consolidated_vw
+    columns:
+      - name: property_id
+        tests:
+          - unique:
+              config:
+                store_failures: true
+          - not_null:
+              config:
+                store_failures: false

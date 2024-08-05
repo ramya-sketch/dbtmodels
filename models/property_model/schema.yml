@@ -1,0 +1,8 @@
+version: 2
+models:
+  - name: consolidated_info_vw
+    columns:
+      - name: property_id
+        tests:
+          - unique
+          - not_null
