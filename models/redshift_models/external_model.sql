@@ -1,3 +1,4 @@
+{{ config(materialized='table') }}
 WITH people_data AS (
     SELECT
         id,
