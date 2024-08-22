@@ -10,3 +10,19 @@ models:
           - not_null:
               config:
                 store_failures: false
+
+  - name: external_model
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        tests:
+          - not_null
+      - name: last_name
+        tests:
+          - not_null
+      - name: email
+        tests:
+          - not_null
