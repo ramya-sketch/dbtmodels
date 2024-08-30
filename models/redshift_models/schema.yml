@@ -10,6 +10,13 @@ models:
           - not_null:
               config:
                 store_failures: false
+      - name: purchase_date
+        tests:
+          - unique:
+              config:
+                store_failures: true
+
+      
 
   - name: external_model
     columns:
