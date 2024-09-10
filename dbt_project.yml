@@ -45,5 +45,5 @@ models:
       +materialized: view
     redshift_models:
       +materialized: table
-    snowflake_models:
+    snowflake_model:
       +materialized: view 
