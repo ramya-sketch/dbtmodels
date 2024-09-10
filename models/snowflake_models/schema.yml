@@ -1,0 +1,8 @@
+version: 2
+models:
+  - name: product_sales_vw
+    columns:
+      - name: PRODUCT_ID
+        tests:
+          - unique
+          - not_null
