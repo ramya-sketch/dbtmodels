@@ -46,4 +46,5 @@ models:
     redshift_models:
       +materialized: table
     snowflake_model:
+      schema: REPORTING
       +materialized: view
