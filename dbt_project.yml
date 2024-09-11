@@ -47,4 +47,3 @@ models:
       +materialized: table
     snowflake_model:
       +materialized: view
-      schema: reporting 
