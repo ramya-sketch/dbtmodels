@@ -1,7 +1,3 @@
-{{ config(
-    schema='REPORTING'
-) }}
-
 WITH employee_sales_vw AS  (
     SELECT 
     A.SALESORDERID,
