@@ -6,3 +6,9 @@ models:
         tests:
           - unique
           - not_null
+  - name: employee_sales_vw
+    columns:
+      - name: PRODUCTID
+        tests:
+          - unique
+          - not_null
