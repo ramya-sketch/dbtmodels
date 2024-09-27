@@ -1,0 +1,8 @@
+version: 2
+models:
+  - name: customer_data_vw
+    columns:
+      - name: CUSTOMER_ID
+        tests:
+          - unique
+          - not_null

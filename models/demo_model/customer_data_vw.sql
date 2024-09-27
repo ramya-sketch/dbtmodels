@@ -1,0 +1,5 @@
+WITH customer_data_vw AS  (
+    SELECT * FROM DQLABS_QA.REPORTING.CUSTOMER_DATA_DEMO
+    WHERE  IS_ACTIVE = TRUE
+)
+SELECT * FROM customer_data_vw
