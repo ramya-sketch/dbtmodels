@@ -14,8 +14,8 @@ WITH CUSTOMER_DATA AS (
         ORDERx.ORDER_ID, 
         ORDERx.STATUS, 
         ORDERx.ORDER_DATE
-    FROM DQLABS_QA.DBT_CORE.STG_CUSTOMER CUSTOMER
-    JOIN DQLABS_QA.DBT_CORE.STG_ORDERS ORDERx 
+    FROM {{ ref('stg_customer') }} CUSTOMER
+    JOIN {{ ref('stg_orders') }} ORDERx 
         ON CUSTOMER.CUSTOMER_ID = ORDERx.CUSTOMER_ID
     {% if is_incremental() %}
         -- Assuming ORDER_DATE is the column indicating new records
