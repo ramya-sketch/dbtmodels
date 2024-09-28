@@ -48,3 +48,6 @@ models:
     snowflake_model:
       schema: REPORTING
       +materialized: view
+    sf_customer_model:
+      schema: CUSTOMERAI
+      +materialized: view
