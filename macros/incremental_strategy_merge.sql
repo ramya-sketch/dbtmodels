@@ -1,8 +1,6 @@
-{% macro get_incremental_merge_sql(target_relation, source_relation, unique_key) %}
-    {% if not source_relation %}
-        {{ exceptions.raise_compiler_error("parameter 'source_relation' was not provided") }}
-    {% endif %}
-
+{% macro get_incremental_merge_sql(target_relation, unique_key) %}
+    {% set source_relation = source_relation if source_relation is defined else this %}
+    
     merge into {{ target_relation }} as target
     using {{ source_relation }} as source
     on target.{{ unique_key }} = source.{{ unique_key }}
@@ -28,3 +26,4 @@
             {% endfor %}
         );
 {% endmacro %}
+
