@@ -2,20 +2,39 @@
 config(
     materialized='incremental',
     unique_key='CUSTOMER_ID',
-    incremental_strategy='delete-insert'
+    incremental_strategy='delete+insert'
 )
 }}
 
-with customer_data as (
-    select ORDERx.CUSTOMER_ID, FIRST_NAME, LAST_NAME, ORDER_ID, STATUS, ORDER_DATE, NULL as EMAIL,NULL as PHONE_NUMBER,
-    NULL as DATE_OF_BIRTH,NULL as REGISTRATION_DATE,NULL as LAST_LOGIN_DATE,NULL as IS_ACTIVE,NULL as ADDRESS,NULL as CITY,
-    NULL as STATE,NULL as COUNTRY,NULL as POSTAL_CODE,NULL as SUBSCRIPTION_LEVEL,NULL as ACCOUNT_BALANCE,
-    NULL as LAST_PURCHASE_DATE,NULL as LOYALTY_POINTS,NULL as CREDIT_LIMIT,NULL as UPDATEDDATE,NULL as ZERO_COLUMN,
-    NULL as NULLCHECK,NULL as NULL_ZERO_CHECK,NULL as TRANS_CODE,NULL as MIDDLE_INITIAL,NULL as NOTES,NULL as PROFILE_PIC,
-    NULL as CREATED_AT,NULL as NUM_OF_ORDERS,NULL as TOTAL_ORDER_AMOUNT,NULL as DISCOUNT_RATE,NULL as CUSTOMER_RATING,
-    NULL as CUSTOMER_AGE,NULL as IS_NEW_CUSTOMER,NULL as CUSTOMER_DATA,NULL as CUSTOMER_DESCRIPTION,NULL as FULLTIME,
-    NULL as NULL_COLUMN
-    FROM DQLABS_QA.DBT_CORE.STG_CUSTOMER CUSTOMER
-    JOIN DQLABS_QA.DBT_CORE.STG_ORDERS ORDERx ON CUSTOMER.CUSTOMER_ID=ORDERx.CUSTOMER_ID
+WITH customer_data AS (
+    SELECT 
+        o.ORDER_ID, 
+        o.CUSTOMER_ID, 
+        o.ORDER_DATE, 
+        o.STATUS, 
+        c.FIRST_NAME, 
+        c.LAST_NAME,
+        ROW_NUMBER() OVER (ORDER BY o.ORDER_DATE DESC) AS row_num
+    FROM 
+        {{ ref('stg_orders') }} o
+    JOIN 
+        {{ ref('stg_customer') }} c
+    ON 
+        o.CUSTOMER_ID = c.CUSTOMER_ID
 )
-SELECT * FROM CUSTOMER_DATA LIMIT 50
+
+SELECT 
+    ORDER_ID, 
+    CUSTOMER_ID, 
+    ORDER_DATE, 
+    STATUS, 
+    FIRST_NAME, 
+    LAST_NAME
+FROM 
+    customer_data
+
+{% if is_incremental() %}
+    WHERE row_num <= 50
+{% else %}
+    WHERE row_num <= 50
+{% endif %}
