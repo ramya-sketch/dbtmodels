@@ -34,7 +34,10 @@ FROM
     customer_data
 
 {% if is_incremental() %}
-    WHERE row_num <= 50
+    -- Incrementally load 5 new rows per run
+    WHERE row_num > (SELECT COUNT(*) FROM {{ this }}) 
+      AND row_num <= ((SELECT COUNT(*) FROM {{ this }}) + 5)
 {% else %}
-    WHERE row_num <= 50
+    -- For the first full load, load the first 5 rows
+    WHERE row_num <= 5
 {% endif %}
