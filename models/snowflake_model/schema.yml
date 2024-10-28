@@ -4,6 +4,6 @@ models:
     columns:
       - name: PRODUCTID
         tests:
-          - unique
-          # - not_null
+          # - unique
+          - not_null
   - name: employee_sales_vw
