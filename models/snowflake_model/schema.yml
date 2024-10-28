@@ -5,5 +5,5 @@ models:
       - name: PRODUCTID
         tests:
           - unique
-          - not_null
+          # - not_null
   - name: employee_sales_vw

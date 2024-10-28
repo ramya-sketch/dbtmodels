@@ -38,6 +38,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   dbttest:
     DQ_QA_Module:
+      schema: dqlabs
       +materialized: view
     finance_model:
       +materialized: view
