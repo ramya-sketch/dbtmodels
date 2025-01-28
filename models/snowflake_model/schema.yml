@@ -1,10 +1,18 @@
 version: 2
+
 models:
   - name: product_sales_vw
+    description: "A view showing product sales data"
     columns:
       - name: PRODUCTID
-        tags: ['Finance']
+        description: "The unique identifier for the product"
         tests:
-          # - unique
           - not_null
+          # - unique
+    tags:
+      - Finance
+
   - name: employee_sales_vw
+    description: "A view showing employee sales data"
+    tags:
+      - Sales
