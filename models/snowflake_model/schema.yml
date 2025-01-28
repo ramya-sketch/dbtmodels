@@ -3,6 +3,7 @@ models:
   - name: product_sales_vw
     columns:
       - name: PRODUCTID
+        tags: ['Finance']
         tests:
           # - unique
           - not_null
