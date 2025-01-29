@@ -2,6 +2,7 @@ version: 2
 
 models:
   - name: product_sales_vw
+    tags: ["production", "analytics"]  # Corrected tag placement
     description: "A view showing product sales data"
     columns:
       - name: PRODUCTID
@@ -9,10 +10,8 @@ models:
         tests:
           - not_null
           # - unique
-    tags:
-      - Finance
 
   - name: employee_sales_vw
+    tags: ["production", "analytics"]  # Corrected tag placement
     description: "A view showing employee sales data"
-    tags:
-      - Sales
+
