@@ -1,4 +1,4 @@
-{{ config(tags=["staging", "etl"]) }}
+--{{ config(tags=["staging", "etl"]) }}
 
 WITH employee_sales_vw AS  (
     SELECT 
