@@ -1,4 +1,4 @@
---{{ config(tags=["staging", "etl"]) }}
+{{ config(tags=["staging", "etl"]) }}
 
 with product_sales_vw as (
 SELECT PRODUCTID, TOTAL_AMOUNT AS TOTAL_AMOUNT_SALES
