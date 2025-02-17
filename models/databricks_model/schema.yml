@@ -12,3 +12,6 @@ models:
 
   - name: passenger_airline
     description: "passenger_airline_vw"
+
+  - name: passenger_flight
+    description: "passgener by flight"

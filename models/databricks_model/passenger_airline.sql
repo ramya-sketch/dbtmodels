@@ -1,5 +1,3 @@
-{{ config(tags=["staging", "etl"]) }}
-
 WITH passenger_airline_vw AS  (
 SELECT a.*
 FROM main.easyjet.passenger_loyalty_data p
