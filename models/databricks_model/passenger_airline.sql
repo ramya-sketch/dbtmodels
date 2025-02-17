@@ -1,7 +1,7 @@
 {{ config(tags=["staging", "etl"]) }}
 
 WITH passenger_airline_vw AS  (
-SELECT p.*, a.*
+SELECT a.*
 FROM main.easyjet.passenger_loyalty_data p
 JOIN main.easyjet.airline_passenger_data a
 ON p.PassengerID = a.PassengerID
