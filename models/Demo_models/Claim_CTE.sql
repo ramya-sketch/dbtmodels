@@ -1,13 +1,5 @@
-WITH Claim_CTE AS (
-    SELECT 
-        ClaimID,
-        PolicyID,
-        ClaimAmount,
-        Status,
-        ClaimDate,
-        DESCRIPTION,
-        REPORTEDBY,
-        CLAIMTYPE
-    FROM DQLABS_QA.SOURCE_DEMO.Claim
+WITH claim_vw AS (
+SELECT CLAIMID, POLICYID, CLAIMAMOUNT, CLAIMDATE, STATUS, CLAIMTYPE, REPORTEDBY, DESCRIPTION
+FROM DQLABS_QA.SOURCE_DEMO.CLAIM
 )
-SELECT * FROM Claim_CTE
+SELECT * FROM claim_vw

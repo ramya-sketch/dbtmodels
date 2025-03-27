@@ -1,8 +1,7 @@
 version: 2
 
 models:
-  - name: Claim
-    tags: ["production", "analytics"]  # Corrected tag placement
+  - name: Claim_CTE
     description: "A view showing claim data"
     columns:
       - name: ClaimID
