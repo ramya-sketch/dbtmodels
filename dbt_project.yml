@@ -53,5 +53,5 @@ models:
       schema: CUSTOMERAI
       +materialized: view
     Demo_models:
-      +schema: DQLABS
+      +schema: TARGET_DEMO
       +materialized: view
