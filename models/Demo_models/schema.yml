@@ -9,5 +9,12 @@ models:
         tests:
           - not_null
           # - unique
-
-
+  - name: Policy_CTE
+    tags: ["production", "analytics"]  # Corrected tag placement
+    description: "A view showing product sales data"
+    columns:
+      - name: PolicyID
+        description: "The unique identifier for the product"
+        tests:
+          - not_null
+          # - unique
