@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: Claim
+    tags: ["production", "analytics"]  # Corrected tag placement
+    description: "A view showing claim data"
+    columns:
+      - name: ClaimID
+        description: "The unique identifier for the product"
+        tests:
+          - not_null
+          # - unique
+
+
