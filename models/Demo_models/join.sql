@@ -16,6 +16,6 @@ SELECT
     p.STATUS AS POLICY_STATUS
 FROM {{ ref('Claim_CTE') }} c
 JOIN {{ ref('Policy_CTE') }} p 
-    ON c.claimtype = p.policytype
+    ON c.claimtype = p.polictype
 )
 SELECT * FROM join_vw
