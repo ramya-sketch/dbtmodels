@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: Claim_CTE
+    description: "A view showing claim data"
+    columns:
+      - name: ClaimID
+        description: "The unique identifier for the claim"
+        tests:
+          - not_null
+          - unique
+  - name: Policy_CTE
+    tags: ["production", "analytics"]  # Corrected tag placement
+    description: "A view showing product policy"
+    columns:
+      - name: PolicyID
+        description: "The unique identifier for the policy"
+        tests:
+          - not_null
+          - unique
+  - name: join
+    description: "A view showing product sales data"
+    columns:
+      - name: CUSTOMERID
+        description: "The unique identifier for the customer"
+        tests:
+          - not_null
+          - unique
+      - name: PolicyID
+        description: "The unique identifier for the policy"
+        tests:
+          - not_null
+          - unique
+      - name: ClaimID
+        description: "The unique identifier for the claim"
+        tests:
+          - not_null
+          - unique

@@ -52,3 +52,6 @@ models:
     sf_customer_model:
       schema: CUSTOMERAI
       +materialized: view
+    Demo_models:
+      +schema: TARGET_DEMO
+      +materialized: view
