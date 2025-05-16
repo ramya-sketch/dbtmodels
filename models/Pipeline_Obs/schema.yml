@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: banking_data_source
+    database: main
+    schema: banking_data_source
+    tables:
+      - name: customers
+      - name: loans
+      - name: transactions
+
+models:
+  - name: banking_data_vw
+    description: "Joined view of customers, loans, and transactions data."
+    columns:
+      - name: customer_id
+        description: "Unique ID for each customer"
+        tests:
+          - not_null:
+              severity: error
+      - name: loan_id
+        description: "Loan ID associated with the customer"
+      - name: transaction_id
+        description: "Transaction ID associated with the customer"
+
+
+
