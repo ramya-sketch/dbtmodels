@@ -15,7 +15,7 @@ SELECT
 FROM 
     {{ ref('customers') }} c
 LEFT JOIN 
-    {{ ref('loan') }} l ON c.customer_id = l.customer_id
+    {{ ref('loans') }} l ON c.customer_id = l.customer_id
 LEFT JOIN 
     {{ ref('transactions') }} t ON c.customer_id = t.customer_id
   
