@@ -55,3 +55,6 @@ models:
     Demo_models:
       +schema: TARGET_DEMO
       +materialized: view
+    Pipeline_Obs:
+      +schema: banking_data_target
+      +materialized: view
