@@ -16,10 +16,12 @@ models:
       - name: customer_id
         description: "Unique ID for each customer"
         tests:
-          - not_null
+          - not_null:
+              severity: error
       - name: loan_id
         description: "Loan ID associated with the customer"
       - name: transaction_id
         description: "Transaction ID associated with the customer"
+
 
 
