@@ -13,11 +13,11 @@ SELECT
     t.transaction_date,
     t.transaction_amount
 FROM 
-    {{ ref('banking_data_target.customers') }} c
+    {{ ref('customers') }} c
 LEFT JOIN 
-    {{ ref('banking_data_target.loans') }} l ON c.customer_id = l.customer_id
+    {{ ref('loans') }} l ON c.customer_id = l.customer_id
 LEFT JOIN 
-    {{ ref('banking_data_target.transactions') }} t ON c.customer_id = t.customer_id
+    {{ ref('transactions') }} t ON c.customer_id = t.customer_id
   
 
 
