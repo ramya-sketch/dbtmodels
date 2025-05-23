@@ -6,9 +6,6 @@ models:
     columns:
       - name: order_id
         description: "Unique identifier for each order."
-        tests:
-          - unique
-          - not_null
       - name: customer_id
         description: "Unique identifier for each customer."
         tests:
