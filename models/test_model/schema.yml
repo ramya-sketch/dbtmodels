@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: customer_orders_incremental
+    description: "This model merges customer order data with customer details."
+    columns:
+      - name: order_id
+        description: "Unique identifier for each order."
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Unique identifier for each customer."
+        tests:
+          - not_null
+      - name: order_date
+        description: "Date when the order was placed."
+        tests:
+          - not_null
+      - name: status
+        description: "Status of the order (e.g., 'completed', 'pending')."
+      - name: first_name
+        description: "First name of the customer."
+      - name: last_name
+        description: "Last name of the customer."
+
+sources:
+  - name: DBT_CORE
+    database: DQLABS_QA
+    schema: DBT_CORE
+    tables:
+      - name: STG_CUSTOMERS
+      - name: STG_ORDERS
