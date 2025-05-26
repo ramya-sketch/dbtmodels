@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: customer_full
+    description: "Cleaned customer base table with address and contact info."
+    columns:
+      - name: customer_id
+        tests: [not_null, unique]
+      - name: email
+        tests: [not_null]
+
+  - name: customer_tickets
+    description: "Customer support ticket data with ticket history."
+    columns:
+      - name: ticket_id
+        tests: [not_null, unique]
+      - name: customer_id
+        tests: [not_null]
+
+  - name: order_payments
+    description: "Order items and payment-level transactional data."
+    columns:
+      - name: order_item_id
+        tests: [not_null, unique]
+      - name: customer_id
+        tests: [not_null]
+
+  - name: dim_customer
+    description: "Customer dimension with address and ticket summary for analytics."
+    columns:
+      - name: customer_id
+        tests: [not_null, unique]
+
+  - name: fct_customer_orders
+    description: "Fact table for customer order and payment activity."
+    columns:
+      - name: order_item_id
+        tests: [not_null, unique]
+      - name: customer_id
+        tests: [not_null]

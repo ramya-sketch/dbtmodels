@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: staging
+    database: DQLABS_QA
+    schema: STAGING
+    tables:
+      - name: customer_full
+        description: "Customer master table with personal and address details."
+      - name: customer_tickets
+        description: "Support tickets submitted by customers."
+      - name: order_payments
+        description: "Order and payment information."
