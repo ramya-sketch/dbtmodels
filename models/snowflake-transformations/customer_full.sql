@@ -1,5 +1,3 @@
-{{ config(materialized='view') }}
-
 SELECT
     customerid AS customer_id,
     firstname AS first_name,
