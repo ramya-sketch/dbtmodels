@@ -1,3 +1,5 @@
+{{ config(materialized='view') }}
+
 WITH base_customer AS (
     SELECT * FROM {{ ref('customer_full') }}
 ),
