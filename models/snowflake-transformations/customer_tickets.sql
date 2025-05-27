@@ -14,4 +14,4 @@ SELECT
     joindate AS join_date,
     status,
     loyaltypoints AS loyalty_points
-FROM {{ source('staging', 'customer_tickets') }}
+FROM DQLABS_QA.staging.customer_tickets

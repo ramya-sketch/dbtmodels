@@ -14,4 +14,4 @@ SELECT
     paymentdate AS payment_date,
     paymentamount AS payment_amount,
     paymentmethod AS payment_method
-FROM {{ source('staging', 'order_payments') }}
+FROM DQLABS_QA.staging.order_payments

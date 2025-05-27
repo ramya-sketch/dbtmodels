@@ -13,4 +13,4 @@ SELECT
     state,
     postalcode AS postal_code,
     country
-FROM {{ source('staging', 'customer_full') }}
+FROM DQLABS_QA.staging.customer_full
