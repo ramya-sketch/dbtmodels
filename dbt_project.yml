@@ -58,3 +58,7 @@ models:
     Pipeline_Obs:
       +schema: banking_data_target
       +materialized: view
+    snowflake-transformations:
+      tags: ["snowflake-transformations"]
+      +schema: REPORTING
+      +materialized: view
