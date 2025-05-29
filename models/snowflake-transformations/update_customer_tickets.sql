@@ -1,7 +1,8 @@
 {{
     config(
         materialized='incremental',
-        unique_key='ticket_id'
+        unique_key='ticket_id',
+        schema='REPORTING',
     )
 }}
 
@@ -11,14 +12,26 @@ SELECT
     t.issue_type,
     t.description,
     TRY_TO_TIMESTAMP(t.ticket_date) AS ticket_date,
-    t.resolution_status,
+
+    -- Change null resolution_status to 'resolved'
+    COALESCE(t.resolution_status, 'resolved') AS resolution_status,
+
     t.first_name,
     t.last_name,
     t.email,
-    t.phone_number,
+
+    -- Remove dashes from phone numbers
+    REPLACE(t.phone_number, '-', '') AS phone_number,
+
     t.join_date,
     t.status,
-    t.loyalty_points
+
+    -- Cap loyalty points at 10,000
+    CASE 
+        WHEN t.loyalty_points > 10000 THEN 10000
+        ELSE t.loyalty_points
+    END AS loyalty_points
+
 FROM {{ ref('customer_tickets') }} t
 
 {% if is_incremental() %}
