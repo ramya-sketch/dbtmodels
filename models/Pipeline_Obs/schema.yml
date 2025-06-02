@@ -15,7 +15,7 @@ models:
     columns:
       - name: customer_id
         description: "Unique ID for each customer"
-        tests:
+        # tests:
           # - not_null:
           #     severity: error
       - name: loan_id
