@@ -17,19 +17,3 @@ models:
           - not_null:
               severity: warn
 
-sources:
-  - name: raw         # schema or database layer name
-    database: your_database_name   # optional
-    schema: your_schema_name       # optional
-    tables:
-      - name: stg_orders
-        loaded_at_field: updated_at   # column in the raw table
-        freshness:
-          warn_after: { count: 15, period: minute }
-          error_after: { count: 1, period: hour }
-
-      - name: stg_customers
-        loaded_at_field: updated_at
-        freshness:
-          warn_after: { count: 30, period: minute }
-          error_after: { count: 2, period: hour }
