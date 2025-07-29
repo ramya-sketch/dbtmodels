@@ -1,0 +1,68 @@
+{{
+  config(
+    materialized='table',
+    tags=['staging', 'retail_sales']
+  )
+}}
+
+WITH source_data AS (
+  SELECT 
+    RECORD_ID,
+    "DATE",
+    STORE_ID,
+    PRODUCT_NAME,
+    CATEGORY,
+    QUANTITY,
+    UNIT_PRICE,
+    TOTAL_AMOUNT,
+    CUSTOMER_ID,
+    SALES_REP,
+    REGION
+  FROM {{ source('dqlabs_qa', 'retail_sales') }}
+  WHERE RECORD_ID IS NOT NULL
+    AND "DATE" IS NOT NULL
+    AND STORE_ID IS NOT NULL
+    AND PRODUCT_NAME IS NOT NULL
+    AND CATEGORY IS NOT NULL
+    AND QUANTITY IS NOT NULL
+    AND UNIT_PRICE IS NOT NULL
+    AND TOTAL_AMOUNT IS NOT NULL
+    AND CUSTOMER_ID IS NOT NULL
+    AND SALES_REP IS NOT NULL
+    AND REGION IS NOT NULL
+),
+
+deduplicated_data AS (
+  SELECT 
+    RECORD_ID,
+    "DATE",
+    STORE_ID,
+    PRODUCT_NAME,
+    CATEGORY,
+    QUANTITY,
+    UNIT_PRICE,
+    TOTAL_AMOUNT,
+    CUSTOMER_ID,
+    SALES_REP,
+    REGION,
+    ROW_NUMBER() OVER (
+      PARTITION BY RECORD_ID 
+      ORDER BY "DATE" DESC, TOTAL_AMOUNT DESC
+    ) as rn
+  FROM source_data
+)
+
+SELECT 
+  RECORD_ID,
+  "DATE",
+  STORE_ID,
+  PRODUCT_NAME,
+  CATEGORY,
+  QUANTITY,
+  UNIT_PRICE,
+  TOTAL_AMOUNT,
+  CUSTOMER_ID,
+  SALES_REP,
+  REGION
+FROM deduplicated_data
+WHERE rn = 1 
