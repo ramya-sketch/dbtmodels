@@ -1,0 +1,140 @@
+{{
+  config(
+    materialized='table',
+    tags=['marts', 'fact', 'macbook_air_sales']
+  )
+}}
+
+WITH macbook_air_sales AS (
+  SELECT 
+    RECORD_ID,
+    "DATE",
+    STORE_ID,
+    PRODUCT_NAME,
+    CATEGORY,
+    QUANTITY,
+    UNIT_PRICE,
+    TOTAL_AMOUNT,
+    CUSTOMER_ID,
+    SALES_REP,
+    REGION,
+    -- MacBook Air specific analysis
+    CASE 
+      WHEN LOWER(PRODUCT_NAME) LIKE '%macbook air%' THEN 'MACBOOK_AIR'
+      WHEN LOWER(PRODUCT_NAME) LIKE '%macbook%' THEN 'OTHER_MACBOOK'
+      ELSE 'NON_MACBOOK'
+    END as PRODUCT_TYPE,
+    -- Price analysis
+    CASE 
+      WHEN UNIT_PRICE >= 1200 THEN 'PREMIUM_MODEL'
+      WHEN UNIT_PRICE >= 900 THEN 'STANDARD_MODEL'
+      ELSE 'BUDGET_MODEL'
+    END as PRICE_TIER,
+    -- Sales performance metrics
+    TOTAL_AMOUNT / NULLIF(QUANTITY, 0) as AVG_UNIT_PRICE,
+    -- Customer segmentation
+    CASE 
+      WHEN TOTAL_AMOUNT >= 2000 THEN 'VIP_CUSTOMER'
+      WHEN TOTAL_AMOUNT >= 1000 THEN 'PREMIUM_CUSTOMER'
+      ELSE 'STANDARD_CUSTOMER'
+    END as CUSTOMER_SEGMENT,
+    -- Regional analysis
+    CASE 
+      WHEN REGION IN ('North', 'Northeast') THEN 'NORTH_REGION'
+      WHEN REGION IN ('South', 'Southeast') THEN 'SOUTH_REGION'
+      WHEN REGION IN ('West', 'Southwest') THEN 'WEST_REGION'
+      ELSE 'OTHER_REGION'
+    END as REGION_GROUP,
+    -- Time-based analysis
+    EXTRACT(YEAR FROM "DATE") as SALE_YEAR,
+    EXTRACT(MONTH FROM "DATE") as SALE_MONTH,
+    EXTRACT(DAY FROM "DATE") as SALE_DAY,
+    EXTRACT(QUARTER FROM "DATE") as SALE_QUARTER,
+    EXTRACT(DAYOFWEEK FROM "DATE") as SALE_DAY_OF_WEEK,
+    -- Business intelligence
+    CASE 
+      WHEN QUANTITY >= 5 THEN 'BULK_PURCHASE'
+      WHEN QUANTITY >= 2 THEN 'MULTIPLE_UNITS'
+      ELSE 'SINGLE_UNIT'
+    END as PURCHASE_TYPE,
+    -- Revenue analysis
+    TOTAL_AMOUNT * 0.1 as ESTIMATED_PROFIT_MARGIN,
+    TOTAL_AMOUNT * 0.05 as ESTIMATED_COMMISSION
+  FROM {{ ref('stg_retail_sales') }}
+  WHERE LOWER(PRODUCT_NAME) LIKE '%macbook air%'
+    AND CATEGORY = 'Electronics'
+    AND QUANTITY > 0
+    AND UNIT_PRICE > 0
+    AND TOTAL_AMOUNT > 0
+),
+
+final_macbook_air AS (
+  SELECT 
+    RECORD_ID,
+    "DATE",
+    STORE_ID,
+    PRODUCT_NAME,
+    CATEGORY,
+    QUANTITY,
+    UNIT_PRICE,
+    TOTAL_AMOUNT,
+    CUSTOMER_ID,
+    SALES_REP,
+    REGION,
+    PRODUCT_TYPE,
+    PRICE_TIER,
+    AVG_UNIT_PRICE,
+    CUSTOMER_SEGMENT,
+    REGION_GROUP,
+    SALE_YEAR,
+    SALE_MONTH,
+    SALE_DAY,
+    SALE_QUARTER,
+    SALE_DAY_OF_WEEK,
+    PURCHASE_TYPE,
+    ESTIMATED_PROFIT_MARGIN,
+    ESTIMATED_COMMISSION,
+    -- Additional calculated fields
+    CASE 
+      WHEN SALE_DAY_OF_WEEK IN (1, 7) THEN 'WEEKEND'
+      ELSE 'WEEKDAY'
+    END as SALE_PERIOD,
+    CASE 
+      WHEN SALE_MONTH IN (11, 12) THEN 'HOLIDAY_SEASON'
+      WHEN SALE_MONTH IN (6, 7, 8) THEN 'SUMMER_SEASON'
+      ELSE 'REGULAR_SEASON'
+    END as SEASONAL_PERIOD
+  FROM macbook_air_sales
+)
+
+SELECT 
+  RECORD_ID,
+  "DATE",
+  STORE_ID,
+  PRODUCT_NAME,
+  CATEGORY,
+  QUANTITY,
+  UNIT_PRICE,
+  TOTAL_AMOUNT,
+  CUSTOMER_ID,
+  SALES_REP,
+  REGION,
+  PRODUCT_TYPE,
+  PRICE_TIER,
+  AVG_UNIT_PRICE,
+  CUSTOMER_SEGMENT,
+  REGION_GROUP,
+  SALE_YEAR,
+  SALE_MONTH,
+  SALE_DAY,
+  SALE_QUARTER,
+  SALE_DAY_OF_WEEK,
+  PURCHASE_TYPE,
+  ESTIMATED_PROFIT_MARGIN,
+  ESTIMATED_COMMISSION,
+  SALE_PERIOD,
+  SEASONAL_PERIOD,
+  -- Metadata
+  CURRENT_TIMESTAMP() as LOADED_AT,
+  '{{ invocation_id }}' as DBT_RUN_ID
+FROM final_macbook_air 
