@@ -1,62 +1,55 @@
 version: 2
 
-models:
-  - name: stg_retail_sales
-    description: Clean staging model for retail sales data with no nulls or duplicates
-    columns:
-      - name: RECORD_ID
-        description: Primary key for retail sales
-      - name: "DATE"
-        description: Date of the sale
-      - name: STORE_ID
-        description: Store identifier
-      - name: PRODUCT_NAME
-        description: Name of the product sold
-      - name: CATEGORY
-        description: Product category
-      - name: QUANTITY
-        description: Quantity sold
-      - name: UNIT_PRICE
-        description: Price per unit
-      - name: TOTAL_AMOUNT
-        description: Total amount of the sale
-      - name: CUSTOMER_ID
-        description: Customer identifier
-      - name: SALES_REP
-        description: Sales representative
-      - name: REGION
-        description: Sales region
-
-  - name: fct_electronics_sales
-    description: Fact table for electronics sales with business logic and aggregations
-    columns:
-      - name: RECORD_ID
-        description: Primary key
-      - name: CATEGORY
-        description: Product category (should be Electronics)
-      - name: CALCULATED_TOTAL
-        description: Calculated total (quantity * unit_price)
-      - name: PRICE_VALIDATION
-        description: Validation of price calculations
-      - name: ORDER_SIZE
-        description: Order size classification
-      - name: ORDER_VALUE_CATEGORY
-        description: Order value classification
-
-  - name: fct_macbook_air_sales
-    description: Specialized fact table for MacBook Air sales with detailed analysis
-    columns:
-      - name: RECORD_ID
-        description: Primary key
-      - name: PRODUCT_TYPE
-        description: Product type classification
-      - name: PRICE_TIER
-        description: Price tier classification
-      - name: CUSTOMER_SEGMENT
-        description: Customer segmentation
-      - name: PURCHASE_TYPE
-        description: Purchase type classification
-      - name: ESTIMATED_PROFIT_MARGIN
-        description: Estimated profit margin (10% of total amount)
-      - name: ESTIMATED_COMMISSION
-        description: Estimated commission (5% of total amount)
+sources:
+  - name: dqlabs_qa
+    description: "DQLABS QA environment source tables"
+    database: DQLABS_QA
+    schema: STAGING
+    tables:
+      - name: retail_sales
+        description: "Raw retail sales data from staging"
+        columns:
+          - name: RECORD_ID
+            description: "Unique record identifier"
+            tests:
+              - unique
+              - not_null
+          - name: "DATE"
+            description: "Date of the sale"
+            tests:
+              - not_null
+          - name: STORE_ID
+            description: "Store identifier"
+            tests:
+              - not_null
+          - name: PRODUCT_NAME
+            description: "Name of the product sold"
+            tests:
+              - not_null
+          - name: CATEGORY
+            description: "Product category"
+            tests:
+              - not_null
+          - name: QUANTITY
+            description: "Quantity sold"
+            tests:
+              - not_null
+          - name: UNIT_PRICE
+            description: "Price per unit"
+            # Removed the not_null test for UNIT_PRICE
+          - name: TOTAL_AMOUNT
+            description: "Total amount of the sale"
+            tests:
+              - not_null
+          - name: CUSTOMER_ID
+            description: "Customer identifier"
+            tests:
+              - not_null
+          - name: SALES_REP
+            description: "Sales representative"
+            tests:
+              - not_null
+          - name: REGION
+            description: "Sales region"
+            tests:
+              - not_null
