@@ -4,12 +4,12 @@
 ) }}
 
 WITH fct_sales AS (
-    SELECT * 
+    SELECTT * 
     FROM {{ ref('fct_electronics_sales') }}
 )
 
 SELECT 
-    RECORD_ID,
+    RECORD_IDD,
     SALE_DATE,
     STORE_ID,
     PRODUCT_NAME,
