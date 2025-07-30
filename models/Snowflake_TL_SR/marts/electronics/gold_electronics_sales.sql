@@ -1,14 +1,19 @@
--- gold_electronics_sales.sql
+{{
+  config(
+    materialized='table',
+    tags=['gold', 'electronics']
+  )
+}}
 WITH fct_sales AS (
-    -- Referring to the fact model for electronics sales
     SELECT * 
-    FROM {{ ref('fct_electronics_sales') }}
+    FROM DQLABS_QA.DBT_MODELS.fct_electronics_sales
 )
+
 SELECT 
-    CUSTOMER_NAME,
-    SALE_DATE,
-    TIMESTAMP,
-    SALE_AMOUNT,
-    PRODUCT_NAME
+    RECORD_ID
+   ,DATE,
+    STORE_ID,
+    PRODUCT_NAME,
+    SALE_YEAR
 FROM fct_sales
-WHERE SALE_DATE IS NOT NULL;
+WHERE SALE_YEAR IS NOT NULL
