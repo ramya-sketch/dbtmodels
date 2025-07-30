@@ -9,54 +9,111 @@ models:
         tests:
           - unique
           - not_null
-
       - name: "DATE"
         description: Date of the sale
-        tests:
-          - not_null
-
       - name: STORE_ID
         description: Store identifier
         tests:
           - not_null
-
       - name: PRODUCT_NAME
         description: Name of the product sold
         tests:
           - not_null
-
       - name: CATEGORY
         description: Product category
         tests:
           - not_null
-
       - name: QUANTITY
         description: Quantity sold
         tests:
           - not_null
-        
       - name: UNIT_PRICE
         description: Price per unit
         tests:
           - not_null
-         
-
       - name: TOTAL_AMOUNT
         description: Total amount of the sale
         tests:
           - not_null
-
       - name: CUSTOMER_ID
         description: Customer identifier
         tests:
           - not_null
-
       - name: SALES_REP
         description: Sales representative
         tests:
           - not_null
-
       - name: REGION
         description: Sales region
+        tests:
+          - not_null
+
+  - name: fct_electronics_sales
+    description: Fact table for electronics sales with business logic and aggregations
+    columns:
+      - name: RECORD_ID
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: CATEGORY
+        description: Product category (should be Electronics)
+        tests:
+          - accepted_values:
+              values: ['Electronics']
+      - name: CALCULATED_TOTAL
+        description: Calculated total (quantity * unit_price)
+        tests:
+          - not_null
+      - name: PRICE_VALIDATION
+        description: Validation of price calculations
+        tests:
+          - accepted_values:
+              values: ['PRICE_MATCH', 'PRICE_MISMATCH']
+      - name: ORDER_SIZE
+        description: Order size classification
+        tests:
+          - accepted_values:
+              values: ['SMALL_ORDER', 'MEDIUM_ORDER', 'BULK_ORDER']
+      - name: ORDER_VALUE_CATEGORY
+        description: Order value classification
+        tests:
+          - accepted_values:
+              values: ['LOW_VALUE', 'MEDIUM_VALUE', 'HIGH_VALUE']
+
+  - name: fct_macbook_air_sales
+    description: Specialized fact table for MacBook Air sales with detailed analysis
+    columns:
+      - name: RECORD_ID
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: PRODUCT_TYPE
+        description: Product type classification
+        tests:
+          - accepted_values:
+              values: ['MACBOOK_AIR', 'OTHER_MACBOOK', 'NON_MACBOOK']
+      - name: PRICE_TIER
+        description: Price tier classification
+        tests:
+          - accepted_values:
+              values: ['BUDGET_MODEL', 'STANDARD_MODEL', 'PREMIUM_MODEL']
+      - name: CUSTOMER_SEGMENT
+        description: Customer segmentation
+        tests:
+          - accepted_values:
+              values: ['STANDARD_CUSTOMER', 'PREMIUM_CUSTOMER', 'VIP_CUSTOMER']
+      - name: PURCHASE_TYPE
+        description: Purchase type classification
+        tests:
+          - accepted_values:
+              values: ['SINGLE_UNIT', 'MULTIPLE_UNITS', 'BULK_PURCHASE']
+      - name: ESTIMATED_PROFIT_MARGIN
+        description: Estimated profit margin
+        tests:
+          - not_null
+      - name: ESTIMATED_COMMISSION
+        description: Estimated commission
         tests:
           - not_null
