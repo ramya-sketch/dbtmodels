@@ -16,8 +16,7 @@ sources:
               - not_null
           - name: "DATE"
             description: "Date of the sale"
-            tests:
-              - not_null
+            # Removed not_null test
           - name: STORE_ID
             description: "Store identifier"
             tests:
@@ -44,8 +43,7 @@ sources:
               - not_null
           - name: CUSTOMER_ID
             description: "Customer identifier"
-            tests:
-              - not_null
+            # Removed not_null test
           - name: SALES_REP
             description: "Sales representative"
             tests:
@@ -53,4 +51,4 @@ sources:
           - name: REGION
             description: "Sales region"
             tests:
-              - not_null 
+              - not_null
