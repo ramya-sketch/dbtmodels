@@ -10,27 +10,43 @@ models:
         description: "Name of the customer"
       - name: SALE_AMOUNT
         description: "Amount of the sale"
-        
+
   - name: fct_electronics_sales
     description: "Fact table for electronics sales, aggregated by customer and date"
     columns:
-      - name: CUSTOMER_NAME
-        description: "Name of the customer"
+      - name: RECORD_ID
+        description: "Unique identifier for the sales record"
       - name: SALE_DATE
         description: "Date of sale"
+      - name: CUSTOMER_NAME
+        description: "Customer's name"
+      - name: STORE_ID
+        description: "Store identifier"
+      - name: PRODUCT_NAME
+        description: "Product name"
       - name: SALE_AMOUNT
         description: "Total sales amount"
+      - name: SALE_YEAR
+        description: "Year of sale"
 
   - name: gold_electronics_sales
     description: "Refined gold model for electronics sales"
     columns:
-      - name: CUSTOMER_NAME
-        description: "Name of the customer"
+      - name: RECORD_ID
+        description: "Unique identifier for the sales record"
       - name: SALE_DATE
         description: "Date of sale"
+      - name: CUSTOMER_NAME
+        description: "Customer's name"
+      - name: STORE_ID
+        description: "Store identifier"
+      - name: PRODUCT_NAME
+        description: "Product name"
       - name: SALE_AMOUNT
         description: "Total sales amount"
-        
+      - name: SALE_YEAR
+        description: "Year of sale"
+
   - name: fct_macbook_air_sales
     description: "Fact table for MacBook Air sales"
     columns:
