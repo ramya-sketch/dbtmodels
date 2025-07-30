@@ -14,49 +14,43 @@ sources:
             tests:
               - unique
               - not_null
-
-          # - name: "DATE"
-          #   description: "Date of the sale"
-          #   # Removed failing not_null test
-
-          # - name: STORE_ID
-          #   description: "Store identifier"
-          #   tests:
-          #     - not_null
-
-          # - name: PRODUCT_NAME
-          #   description: "Name of the product sold"
-          #   # Removed failing not_null test
-
-          # - name: CATEGORY
-          #   description: "Product category"
-          #   tests:
-          #     - not_null
-
-          # - name: QUANTITY
-          #   description: "Quantity sold"
-          #   tests:
-          #     - not_null
-
-          # - name: UNIT_PRICE
-          #   description: "Price per unit"
-          #   # Removed failing not_null test
-
-          # - name: TOTAL_AMOUNT
-          #   description: "Total amount of the sale"
-          #   tests:
-          #     - not_null
-
-          # - name: CUSTOMER_ID
-          #   description: "Customer identifier"
-          #   # Removed failing not_null test
-
-          # - name: SALES_REP
-          #   description: "Sales representative"
-          #   tests:
-          #     - not_null
-
-          # - name: REGION
-          #   description: "Sales region"
-          #   tests:
-          #     - not_null
+          - name: DATE
+            description: "Date of the sale"
+            tests:
+              - not_null
+          - name: STORE_ID
+            description: "Store identifier"
+            tests:
+              - not_null
+          - name: PRODUCT_NAME
+            description: "Name of the product sold"
+            tests:
+              - not_null
+          - name: CATEGORY
+            description: "Product category"
+            tests:
+              - not_null
+          - name: QUANTITY
+            description: "Quantity sold"
+            tests:
+              - not_null
+          - name: UNIT_PRICE
+            description: "Price per unit"
+            tests:
+              - not_null
+          - name: TOTAL_AMOUNT
+            description: "Total amount of the sale"
+            tests:
+              - not_null
+          - name: CUSTOMER_ID
+            description: "Customer identifier"
+            tests:
+              - not_null
+          - name: SALES_REP
+            description: "Sales representative"
+            tests:
+              - not_null
+          - name: REGION
+            description: "Sales region"
+            tests:
+              - not_null

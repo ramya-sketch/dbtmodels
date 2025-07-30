@@ -16,5 +16,3 @@ packages:
   # DBT Jinja package for templating functions
   - package: dbt-labs/dbt_jinja
     version: 0.3.0
-
-
