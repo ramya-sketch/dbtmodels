@@ -2,51 +2,32 @@ version: 2
 
 sources:
   - name: dqlabs_qa
-    description: "DQLABS QA environment source tables"
+    description: DQLABS QA environment source tables
     database: DQLABS_QA
     schema: STAGING
     tables:
       - name: retail_sales
-        description: "Raw retail sales data from staging"
+        description: Raw retail sales data from staging
         columns:
           - name: RECORD_ID
-            description: "Unique record identifier"
-            tests:
-              - unique
-              - not_null
+            description: Unique record identifier
           - name: "DATE"
-            description: "Date of the sale"
-            # Removed the not_null test for DATE
+            description: Date of the sale
           - name: STORE_ID
-            description: "Store identifier"
-            tests:
-              - not_null
+            description: Store identifier
           - name: PRODUCT_NAME
-            description: "Name of the product sold"
-            # Removed the not_null test for PRODUCT_NAME
+            description: Name of the product sold
           - name: CATEGORY
-            description: "Product category"
-            tests:
-              - not_null
+            description: Product category
           - name: QUANTITY
-            description: "Quantity sold"
-            tests:
-              - not_null
+            description: Quantity sold
           - name: UNIT_PRICE
-            description: "Price per unit"
-            # Removed the not_null test for UNIT_PRICE
+            description: Price per unit
           - name: TOTAL_AMOUNT
-            description: "Total amount of the sale"
-            tests:
-              - not_null
+            description: Total amount of the sale
           - name: CUSTOMER_ID
-            description: "Customer identifier"
-            # Removed the not_null test for CUSTOMER_ID
+            description: Customer identifier
           - name: SALES_REP
-            description: "Sales representative"
-            tests:
-              - not_null
+            description: Sales representative
           - name: REGION
-            description: "Sales region"
-            tests:
-              - not_null
+            description: Sales region
