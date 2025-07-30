@@ -1,18 +1,3 @@
-# packages.yml
-
 packages:
-  # DBT Expectations package for data quality checks and tests
   - package: calogica/dbt_expectations
     version: 0.9.0
-
-  # DBT utils package with helpful macros for common DBT tasks
-  - package: dbt-labs/dbt_utils
-    version: 0.9.1
-
-  # DBT Snowflake package with helpers for working with Snowflake
-  - package: dbt-labs/dbt_snowflake
-    version: 0.23.0
-
-  # DBT Jinja package for templating functions
-  - package: dbt-labs/dbt_jinja
-    version: 0.3.0

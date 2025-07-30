@@ -2,75 +2,60 @@ version: 2
 
 sources:
   - name: dqlabs_qa_retail_sales
-    tables:
-      - name: retail_sales
-
-models:
-  - name: Snowflake_TL_SR
-    description: "Snowflake Transformation model for retail sales"
-    columns:
-      - name: CATEGORY
-        description: "Product category"
-        tests:
-          - not_null
-
-      - name: CUSTOMER_ID
-        description: "Customer ID"
-        tests:
-          - not_null
-
-      - name: DATE
-        description: "Sale date"
-        tests:
-          - not_null
-
-      - name: PRODUCT_NAME
-        description: "Product name"
-        tests:
-          - not_null
-
-      - name: QUANTITY
-        description: "Quantity sold"
-        tests:
-          - not_null
-          - positive  # Built-in dbt test to check for positive values
-
-      - name: RECORD_ID
-        description: "Unique record identifier"
-        tests:
-          - not_null
-
-      - name: REGION
-        description: "Sales region"
-        tests:
-          - not_null
-
-      - name: SALES_REP
-        description: "Sales representative"
-        tests:
-          - not_null
-
-      - name: TOTAL_AMOUNT
-        description: "Total sale amount"
-        tests:
-          - not_null
-          - positive  # Built-in dbt test to check for positive values
-
-sources:
-  - name: dqlabs_qa_retail_sales
+    description: "Source table for retail sales data"
     tables:
       - name: retail_sales
         description: "Raw retail sales data"
         columns:
+          - name: SALE_DATE
+            description: "Date of sale"
+            tests:
+              - not_null
+
+          - name: STORE_ID
+            description: "Store ID where the sale occurred"
+            tests:
+              - not_null
+
+          - name: PRODUCT_NAME
+            description: "Name of the product sold"
+            tests:
+              - not_null
+
+          - name: CATEGORY
+            description: "Category of the product"
+            tests:
+              - not_null
+
           - name: QUANTITY
-            description: "Quantity of products sold"
+            description: "Quantity of the product sold"
             tests:
               - not_null
-              - positive  # Built-in dbt test to check for positive values
-
+          - name: UNIT_PRICE
+            description: "Unit price of the product"
+            tests:
+              - not_null
           - name: TOTAL_AMOUNT
-            description: "Total amount of the sale"
+            description: "Total sale amount (Quantity * Unit Price)"
             tests:
               - not_null
-              - positive  # Built-in dbt test to check for positive values
 
+          - name: CUSTOMER_ID
+            description: "ID of the customer making the purchase"
+            tests:
+              - not_null
+
+          - name: CUSTOMER_NAME
+            description: "Name of the customer"
+            tests:
+              - not_null
+
+          - name: REGION
+            description: "Sales region"
+            tests:
+              - not_null
+
+          - name: TIMESTAMP
+            description: "Timestamp of when the record was created"
+            tests:
+              - not_null
