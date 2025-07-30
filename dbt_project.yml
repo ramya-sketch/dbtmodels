@@ -62,3 +62,7 @@ models:
       tags: ["snowflake-transformations"]
       +schema: REPORTING
       +materialized: view
+    Snowflake_TL_SR: 
+      +materialized: view
+      +schema: DBT_MODLES
+      
