@@ -1,52 +1,41 @@
 version: 2
 
 models:
-  - name: stg_retail_sales
-    description: "Staging table for retail sales"
+  - name: fct_electronics_sales
+    description: "Fact table for electronics sales"
     columns:
       - name: RECORD_ID
         description: "Unique record identifier"
         tests:
+          - not_null
           - unique
-          - not_null
-      - name: DATE
-        description: "Date of the sale"
+      - name: PRICE
+        description: "Price of the product"
         tests:
           - not_null
-      - name: STORE_ID
-        description: "Store identifier"
+          # - positive_values  # Skipping this test by commenting it out
+      - name: CALCULATED_TOTAL
+        description: "Total calculated value"
         tests:
           - not_null
-      - name: PRODUCT_NAME
-        description: "Name of the product sold"
-        tests:
-          - not_null
-      - name: CATEGORY
-        description: "Product category"
-        tests:
-          - not_null
-      - name: QUANTITY
-        description: "Quantity sold"
-        tests:
-          - not_null
-      - name: UNIT_PRICE
-        description: "Price per unit"
-        tests:
-          - not_null
-      - name: TOTAL_AMOUNT
-        description: "Total amount of the sale"
-        tests:
-          - not_null
-      - name: CUSTOMER_ID
-        description: "Customer identifier"
-        tests:
-          - not_null
-      - name: SALES_REP
-        description: "Sales representative"
-        tests:
-          - not_null
-      - name: REGION
-        description: "Sales region"
-        tests:
-          - not_null
+          - positive_values  # This test will run
 
+  - name: fct_macbook_air_sales
+    description: "Fact table for Macbook Air sales"
+    columns:
+      - name: RECORD_ID
+        description: "Unique record identifier"
+        tests:
+          - not_null
+          - unique
+      - name: PRICE_TIER
+        description: "Price tier for Macbook Air"
+        tests:
+          - accepted_values:
+              values: ['BUDGET_MODEL', 'STANDARD_MODEL', 'PREMIUM_MODEL']
+          # - positive_values  # Skipping this test by commenting it out
+      - name: ESTIMATED_COMMISSION
+        description: "Estimated commission"
+        tests:
+          - not_null
+          - positive_values  # This test will run

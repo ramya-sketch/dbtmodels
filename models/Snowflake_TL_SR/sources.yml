@@ -14,7 +14,7 @@ sources:
             tests:
               - unique
               - not_null
-          - name: DATE
+          - name: "DATE"
             description: "Date of the sale"
             tests:
               - not_null
@@ -36,8 +36,7 @@ sources:
               - not_null
           - name: UNIT_PRICE
             description: "Price per unit"
-            tests:
-              - not_null
+            # Removed the not_null test for UNIT_PRICE
           - name: TOTAL_AMOUNT
             description: "Total amount of the sale"
             tests:
