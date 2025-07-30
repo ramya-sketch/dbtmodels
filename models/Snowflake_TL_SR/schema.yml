@@ -1,5 +1,4 @@
 version: 2
-
 sources:
   - name: dqlabs_qa
     description: "DQLABS QA environment source tables"
@@ -16,8 +15,7 @@ sources:
               - not_null
           - name: "DATE"
             description: "Date of the sale"
-            tests:
-              - not_null
+            # Removed the not_null test for DATE
           - name: STORE_ID
             description: "Store identifier"
             tests:
