@@ -27,19 +27,6 @@ sources:
             tests:
               - not_null
 
-          - name: QUANTITY
-            description: "Quantity of the product sold"
-            tests:
-              - not_null
-          - name: UNIT_PRICE
-            description: "Unit price of the product"
-            tests:
-              - not_null
-          - name: TOTAL_AMOUNT
-            description: "Total sale amount (Quantity * Unit Price)"
-            tests:
-              - not_null
-
           - name: CUSTOMER_ID
             description: "ID of the customer making the purchase"
             tests:
