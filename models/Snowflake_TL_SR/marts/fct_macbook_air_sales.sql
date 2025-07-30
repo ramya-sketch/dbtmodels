@@ -61,7 +61,7 @@ WITH macbook_air_sales AS (
     TOTAL_AMOUNT * 0.1 as ESTIMATED_PROFIT_MARGIN,
     TOTAL_AMOUNT * 0.05 as ESTIMATED_COMMISSION
   FROM {{ ref('stg_retail_sales') }}
-  WHERE LOWER(PRODUCT_NAME) LIKE '%macbook air%'
+  WHERE LOWER(PRODUCT_NAME) LIKE '%macbook air%'  -- Keep filter here only
     AND CATEGORY = 'Electronics'
     AND QUANTITY > 0
     AND UNIT_PRICE > 0
@@ -137,4 +137,4 @@ SELECT
   -- Metadata
   CURRENT_TIMESTAMP() as LOADED_AT,
   '{{ invocation_id }}' as DBT_RUN_ID
-FROM final_macbook_air 
+FROM final_macbook_air
