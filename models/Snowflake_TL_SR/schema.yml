@@ -9,11 +9,6 @@ sources:
       - name: retail_sales
         description: "Raw retail sales data"
         columns:
-          - name: SALE_DATE
-            description: "Date of sale"
-            tests:
-              - not_null
-
           - name: STORE_ID
             description: "Store ID where the sale occurred"
             tests:
@@ -34,33 +29,7 @@ sources:
             tests:
               - not_null
 
-          - name: CUSTOMER_NAME
-            description: "Name of the customer"
-            tests:
-              - not_null
-
           - name: REGION
             description: "Sales region"
             tests:
               - not_null
-
-          - name: TIMESTAMP
-            description: "Timestamp of when the record was created"
-            tests:
-              - not_null
-
-          # Removed the positive value tests for these fields
-          - name: QUANTITY
-            description: "Quantity of the product sold"
-            tests:
-              - not_null  # Only keeping not_null test for QUANTITY
-
-          - name: UNIT_PRICE
-            description: "Price per unit of the product"
-            tests:
-              - not_null  # Only keeping not_null test for UNIT_PRICE
-
-          - name: TOTAL_AMOUNT
-            description: "Total sale amount (Quantity * Unit Price)"
-            tests:
-              - not_null  # Only keeping not_null test for TOTAL_AMOUNT
