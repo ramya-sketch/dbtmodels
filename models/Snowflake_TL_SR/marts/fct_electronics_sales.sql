@@ -26,7 +26,7 @@ WITH electronics_sales AS (
     END as PRICE_VALIDATION,
     -- Date dimensions
     EXTRACT(YEAR FROM "DATE") as SALE_YEAR,
-    EXTRACT(MONTH FROM "DATE") as SALE_MONTH,
+    EXTRACT(MONTH FROM "DATE") as SALE_MONTHJ,
     EXTRACT(DAY FROM "DATE") as SALE_DAY,
     EXTRACT(QUARTER FROM "DATE") as SALE_QUARTER,
     -- Business logic
