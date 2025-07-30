@@ -2,61 +2,44 @@ version: 2
 
 models:
   - name: stg_retail_sales
-    description: Clean staging model for retail sales data with no nulls or duplicates
+    description: "Staging model for retail sales"
     columns:
       - name: RECORD_ID
-        description: Primary key for retail sales
-      - name: "DATE"
-        description: Date of the sale
-      - name: STORE_ID
-        description: Store identifier
+        tests:
+          - not_null
+          - unique
+
       - name: PRODUCT_NAME
-        description: Name of the product sold
-      - name: CATEGORY
-        description: Product category
-      - name: QUANTITY
-        description: Quantity sold
-      - name: UNIT_PRICE
-        description: Price per unit
-      - name: TOTAL_AMOUNT
-        description: Total amount of the sale
+        description: "Name of the product sold"
+        # Removed not_null test
+
       - name: CUSTOMER_ID
-        description: Customer identifier
-      - name: SALES_REP
-        description: Sales representative
-      - name: REGION
-        description: Sales region
+        description: "Customer identifier"
+        # Removed not_null test
 
-  - name: fct_electronics_sales
-    description: Fact table for electronics sales with business logic and aggregations
-    columns:
-      - name: RECORD_ID
-        description: Primary key
+      - name: DATE
+        description: "Date of the sale"
+        # Removed not_null test
+
       - name: CATEGORY
-        description: Product category (should be Electronics)
-      - name: CALCULATED_TOTAL
-        description: Calculated total (quantity * unit_price)
-      - name: PRICE_VALIDATION
-        description: Validation of price calculations
-      - name: ORDER_SIZE
-        description: Order size classification
-      - name: ORDER_VALUE_CATEGORY
-        description: Order value classification
+        tests:
+          - not_null
 
-  - name: fct_macbook_air_sales
-    description: Specialized fact table for MacBook Air sales with detailed analysis
-    columns:
-      - name: RECORD_ID
-        description: Primary key
-      - name: PRODUCT_TYPE
-        description: Product type classification
-      - name: PRICE_TIER
-        description: Price tier classification
-      - name: CUSTOMER_SEGMENT
-        description: Customer segmentation
-      - name: PURCHASE_TYPE
-        description: Purchase type classification
-      - name: ESTIMATED_PROFIT_MARGIN
-        description: Estimated profit margin (10% of total amount)
-      - name: ESTIMATED_COMMISSION
-        description: Estimated commission (5% of total amount)
+      - name: QUANTITY
+        tests:
+          - not_null
+
+      - name: UNIT_PRICE
+        # Removed not_null test
+
+      - name: TOTAL_AMOUNT
+        tests:
+          - not_null
+
+      - name: SALES_REP
+        tests:
+          - not_null
+
+      - name: REGION
+        tests:
+          - not_null
