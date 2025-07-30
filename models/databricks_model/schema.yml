@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: flight_passenger
+    description: "passgener by flight"
+    columns:
+      - name: FlightNumber
+        description: "The unique identifier for the filght"
+        tests:
+          - not_null
+          # - unique
+
+  - name: passenger_airline
+    description: "passenger_airline_vw"
+
+  - name: passenger_flight
+    description: "passgener by flight"

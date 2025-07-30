@@ -52,3 +52,13 @@ models:
     sf_customer_model:
       schema: CUSTOMERAI
       +materialized: view
+    Demo_models:
+      +schema: TARGET_DEMO
+      +materialized: view
+    Pipeline_Obs:
+      +schema: banking_data_target
+      +materialized: view
+    snowflake-transformations:
+      tags: ["snowflake-transformations"]
+      +schema: REPORTING
+      +materialized: view
