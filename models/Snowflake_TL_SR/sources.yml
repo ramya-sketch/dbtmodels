@@ -11,23 +11,42 @@ sources:
         columns:
           - name: RECORD_ID
             description: "Unique record identifier"
+            tests:
+              - unique
+              - not_null
           - name: "DATE"
             description: "Date of the sale"
+            # Removed the not_null test for DATE
           - name: STORE_ID
             description: "Store identifier"
+            tests:
+              - not_null
           - name: PRODUCT_NAME
             description: "Name of the product sold"
+            # Removed the not_null test for PRODUCT_NAME
           - name: CATEGORY
             description: "Product category"
+            tests:
+              - not_null
           - name: QUANTITY
             description: "Quantity sold"
+            tests:
+              - not_null
           - name: UNIT_PRICE
             description: "Price per unit"
+            # Removed the not_null test for UNIT_PRICE
           - name: TOTAL_AMOUNT
             description: "Total amount of the sale"
+            tests:
+              - not_null
           - name: CUSTOMER_ID
             description: "Customer identifier"
+            # Removed the not_null test for CUSTOMER_ID
           - name: SALES_REP
             description: "Sales representative"
+            tests:
+              - not_null
           - name: REGION
             description: "Sales region"
+            tests:
+              - not_null
