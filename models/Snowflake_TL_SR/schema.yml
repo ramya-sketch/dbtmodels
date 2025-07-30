@@ -1,35 +1,52 @@
 version: 2
 
-sources:
-  - name: dqlabs_qa_retail_sales
-    description: "Source table for retail sales data"
-    database: DQLABS_QA
-    schema: STAGING
-    tables:
-      - name: retail_sales
-        description: "Raw retail sales data"
-        columns:
-          - name: STORE_ID
-            description: "Store ID where the sale occurred"
-            tests:
-              - not_null
+models:
+  - name: stg_retail_sales
+    description: "Stage raw retail sales data, cleaning and filtering"
+    columns:
+      - name: SALE_DATE
+        description: "Date of sale"
+      - name: CUSTOMER_NAME
+        description: "Name of the customer"
+      - name: SALE_AMOUNT
+        description: "Amount of the sale"
+        
+  - name: fct_electronics_sales
+    description: "Fact table for electronics sales, aggregated by customer and date"
+    columns:
+      - name: CUSTOMER_NAME
+        description: "Name of the customer"
+      - name: SALE_DATE
+        description: "Date of sale"
+      - name: SALE_AMOUNT
+        description: "Total sales amount"
 
-          - name: PRODUCT_NAME
-            description: "Name of the product sold"
-            tests:
-              - not_null
+  - name: gold_electronics_sales
+    description: "Refined gold model for electronics sales"
+    columns:
+      - name: CUSTOMER_NAME
+        description: "Name of the customer"
+      - name: SALE_DATE
+        description: "Date of sale"
+      - name: SALE_AMOUNT
+        description: "Total sales amount"
+        
+  - name: fct_macbook_air_sales
+    description: "Fact table for MacBook Air sales"
+    columns:
+      - name: CUSTOMER_NAME
+        description: "Name of the customer"
+      - name: SALE_DATE
+        description: "Date of sale"
+      - name: SALE_AMOUNT
+        description: "Total sales amount"
 
-          - name: CATEGORY
-            description: "Category of the product"
-            tests:
-              - not_null
-
-          - name: CUSTOMER_ID
-            description: "ID of the customer making the purchase"
-            tests:
-              - not_null
-
-          - name: REGION
-            description: "Sales region"
-            tests:
-              - not_null
+  - name: gold_macbook_air_sales
+    description: "Refined gold model for MacBook Air sales"
+    columns:
+      - name: CUSTOMER_NAME
+        description: "Name of the customer"
+      - name: SALE_DATE
+        description: "Date of sale"
+      - name: SALE_AMOUNT
+        description: "Total sales amount"
