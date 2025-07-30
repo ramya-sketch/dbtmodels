@@ -30,17 +30,6 @@ sources:
             description: "Product category"
             tests:
               - not_null
-          - name: QUANTITY
-            description: "Quantity sold"
-            tests:
-              - not_null
-          - name: UNIT_PRICE
-            description: "Price per unit"
-            # Removed the not_null test for UNIT_PRICE
-          - name: TOTAL_AMOUNT
-            description: "Total amount of the sale"
-            tests:
-              - not_null
           - name: CUSTOMER_ID
             description: "Customer identifier"
             tests:

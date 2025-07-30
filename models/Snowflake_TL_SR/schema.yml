@@ -3,6 +3,8 @@ version: 2
 sources:
   - name: dqlabs_qa_retail_sales
     description: "Source table for retail sales data"
+    database: DQLABS_QA
+    schema: STAGING
     tables:
       - name: retail_sales
         description: "Raw retail sales data"
@@ -46,3 +48,19 @@ sources:
             description: "Timestamp of when the record was created"
             tests:
               - not_null
+
+          # Removed the positive value tests for these fields
+          - name: QUANTITY
+            description: "Quantity of the product sold"
+            tests:
+              - not_null  # Only keeping not_null test for QUANTITY
+
+          - name: UNIT_PRICE
+            description: "Price per unit of the product"
+            tests:
+              - not_null  # Only keeping not_null test for UNIT_PRICE
+
+          - name: TOTAL_AMOUNT
+            description: "Total sale amount (Quantity * Unit Price)"
+            tests:
+              - not_null  # Only keeping not_null test for TOTAL_AMOUNT
