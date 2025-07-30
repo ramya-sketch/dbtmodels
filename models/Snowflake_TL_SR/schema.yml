@@ -1,41 +1,76 @@
 version: 2
 
-models:
-  - name: fct_electronics_sales
-    description: "Fact table for electronics sales"
-    columns:
-      - name: RECORD_ID
-        description: "Unique record identifier"
-        tests:
-          - not_null
-          - unique
-      - name: PRICE
-        description: "Price of the product"
-        tests:
-          - not_null
-          # - positive_values  # Skipping this test by commenting it out
-      - name: CALCULATED_TOTAL
-        description: "Total calculated value"
-        tests:
-          - not_null
-          - positive_values  # This test will run
+sources:
+  - name: dqlabs_qa_retail_sales
+    tables:
+      - name: retail_sales
 
-  - name: fct_macbook_air_sales
-    description: "Fact table for Macbook Air sales"
+models:
+  - name: Snowflake_TL_SR
+    description: "Snowflake Transformation model for retail sales"
     columns:
+      - name: CATEGORY
+        description: "Product category"
+        tests:
+          - not_null
+
+      - name: CUSTOMER_ID
+        description: "Customer ID"
+        tests:
+          - not_null
+
+      - name: DATE
+        description: "Sale date"
+        tests:
+          - not_null
+
+      - name: PRODUCT_NAME
+        description: "Product name"
+        tests:
+          - not_null
+
+      - name: QUANTITY
+        description: "Quantity sold"
+        tests:
+          - not_null
+          - positive  # Built-in dbt test to check for positive values
+
       - name: RECORD_ID
         description: "Unique record identifier"
         tests:
           - not_null
-          - unique
-      - name: PRICE_TIER
-        description: "Price tier for Macbook Air"
-        tests:
-          - accepted_values:
-              values: ['BUDGET_MODEL', 'STANDARD_MODEL', 'PREMIUM_MODEL']
-          # - positive_values  # Skipping this test by commenting it out
-      - name: ESTIMATED_COMMISSION
-        description: "Estimated commission"
+
+      - name: REGION
+        description: "Sales region"
         tests:
           - not_null
-          - positive_values  # This test will run
+
+      - name: SALES_REP
+        description: "Sales representative"
+        tests:
+          - not_null
+
+      - name: TOTAL_AMOUNT
+        description: "Total sale amount"
+        tests:
+          - not_null
+          - positive  # Built-in dbt test to check for positive values
+
+sources:
+  - name: dqlabs_qa_retail_sales
+    tables:
+      - name: retail_sales
+        description: "Raw retail sales data"
+        columns:
+          - name: QUANTITY
+            description: "Quantity of products sold"
+            tests:
+              - not_null
+              - positive  # Built-in dbt test to check for positive values
+
+          - name: TOTAL_AMOUNT
+            description: "Total amount of the sale"
+            tests:
+              - not_null
+              - positive  # Built-in dbt test to check for positive values
+
