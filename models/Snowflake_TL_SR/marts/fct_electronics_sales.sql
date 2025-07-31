@@ -7,7 +7,7 @@
 
 WITH electronics_sales AS (
   SELECT 
-    RECORD_IDD,
+    RECORD_ID,
     "DATE" as SALE_DATE,  -- Renamed to avoid issues with reserved keyword
     STORE_ID,
     PRODUCT_NAME,
