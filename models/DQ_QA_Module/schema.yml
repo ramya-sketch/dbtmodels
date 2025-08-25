@@ -9,4 +9,4 @@ models:
                 store_failures: true
           - not_null:
               config:
-                store_failures: false
+                store_failures: true
