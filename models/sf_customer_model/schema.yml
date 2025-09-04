@@ -8,6 +8,12 @@ models:
               severity: warn
           - not_null:
               severity: warn
+      - name: CUSTOMER_ID
+        tests:
+          - unique:
+              severity: warn
+          - not_null:
+              severity: warn
   - name: stg_customer
     columns:
       - name: CUSTOMER_ID
