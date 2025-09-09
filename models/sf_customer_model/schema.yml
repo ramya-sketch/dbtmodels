@@ -2,30 +2,26 @@ version: 2
 
 models:
   - name: stg_orders
-    description: "Staging model for orders data, bringing raw order records into a standardized format."
     columns:
       - name: ORDER_ID
-        description: "Unique identifier for each order from the source system."
         tests:
           - unique:
               severity: warn
           - not_null:
               severity: warn
+
       - name: CUSTOMER_ID
-        description: "Foreign key linking the order to a customer."
         tests:
+          - unique:
+              severity: warn
           - not_null:
               severity: warn
 
   - name: stg_customer
-    description: "Staging model for customer data, standardizing raw customer information."
     columns:
       - name: CUSTOMER_ID
-        description: "Unique identifier for each customer in the source system."
         tests:
           - unique:
               severity: warn
           - not_null:
               severity: warn
-
-

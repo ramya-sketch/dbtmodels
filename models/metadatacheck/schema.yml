@@ -1,31 +1,57 @@
 version: 2
 
 models:
-  - name: stg_orders
-    description: "Staging model for orders data, bringing raw order records into a standardized format."
+  - name: stg_claims
+    description: >
+      Staging table for claims data sourced from DQLABS_QA.ZTEST.stg_claims.
+      Includes core claim attributes like dates, type, state, and status.
     columns:
-      - name: ORDER_ID
-        description: "Unique identifier for each order from the source system."
+      - name: claim_id
+        description: Unique identifier for each claim
         tests:
-          - unique:
-              severity: warn
-          - not_null:
-              severity: warn
-      - name: CUSTOMER_ID
-        description: "Foreign key linking the order to a customer."
-        tests:
-          - not_null:
-              severity: warn
+          - not_null
+          - unique
 
-  - name: stg_customer
-    description: "Staging model for customer data, standardizing raw customer information."
+      - name: accident_date
+        description: Date of the accident associated with the claim
+        tests:
+          - not_null
+
+      - name: claim_date
+        description: Date when the claim was reported
+        tests:
+          - not_null
+
+      - name: status
+        description: Current claim status (e.g., Open, Closed)
+
+      - name: claim_type
+        description: Type of claim (Auto, Health, Property, etc.)
+
+      - name: state
+        description: State where the claim was filed
+
+  - name: stg_transactions
+    description: >
+      Staging table for transactions data sourced from DQLABS_QA.ZTEST.stg_transactions.
+      Contains transaction details linked to claims.
     columns:
-      - name: CUSTOMER_ID
-        description: "Unique identifier for each customer in the source system."
+      - name: tx_id
+        description: Unique identifier for each transaction
         tests:
-          - unique:
-              severity: warn
-          - not_null:
-              severity: warn
+          - not_null
+          - unique
 
+      - name: claim_id
+        description: Claim identifier that links transaction to claim
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_claims')
+              field: claim_id
 
+      - name: tx_type
+        description: Type of transaction (Repair, Payment, etc.)
+
+      - name: tx_amount
+        description: Transaction amount in USD
