@@ -7,6 +7,6 @@ with source1 as (
         MONTH,
         PARSEDDATE,
         YEAR
-    from 'main'.'dqlabs'.'bankaccount'
+    from {{ source('dqlabs', 'bankaccount') }}
 )
 select * from source1
