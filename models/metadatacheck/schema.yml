@@ -1,0 +1,57 @@
+version: 2
+
+models:
+  - name: stg_claims
+    description: >
+      Staging table for claims data sourced from DQLABS_QA.ZTEST.stg_claims.
+      Includes core claim attributes like dates, type, state, and status.
+    columns:
+      - name: claim_id
+        description: Unique identifier for each claim
+        tests:
+          - not_null
+          - unique
+
+      - name: accident_date
+        description: Date of the accident associated with the claim
+        tests:
+          - not_null
+
+      - name: claim_date
+        description: Date when the claim was reported
+        tests:
+          - not_null
+
+      - name: status
+        description: Current claim status (e.g., Open, Closed)
+
+      - name: claim_type
+        description: Type of claim (Auto, Health, Property, etc.)
+
+      - name: state
+        description: State where the claim was filed
+
+  - name: stg_transactions
+    description: >
+      Staging table for transactions data sourced from DQLABS_QA.ZTEST.stg_transactions.
+      Contains transaction details linked to claims.
+    columns:
+      - name: tx_id
+        description: Unique identifier for each transaction
+        tests:
+          - not_null
+          - unique
+
+      - name: claim_id
+        description: Claim identifier that links transaction to claim
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_claims')
+              field: claim_id
+
+      - name: tx_type
+        description: Type of transaction (Repair, Payment, etc.)
+
+      - name: tx_amount
+        description: Transaction amount in USD
