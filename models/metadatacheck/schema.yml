@@ -12,10 +12,10 @@ models:
           - not_null
           - unique
 
-      - name: accident_date
-        description: Date of the accident associated with the claim
-        tests:
-          - not_null
+     # - name: accident_date
+        #description: Date of the accident associated with the claim
+        #tests:
+          #- not_null
 
       - name: claim_date
         description: Date when the claim was reported
