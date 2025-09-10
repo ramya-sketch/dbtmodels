@@ -1,0 +1,10 @@
+my_project:
+  target: bigquery
+  outputs:
+    bigquery:
+      type: bigquery
+      method: service-account
+      keyfile: /Users/ramya/Downloads/DQlabs_Sanity18 copy/configs/Bigquery_ServiceAccount_Credentials (2).json   
+      project: bionic-genre-363105       # GCP Project
+      dataset: DBADMIN              # BigQuery Dataset
+      threads: 4

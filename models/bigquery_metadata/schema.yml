@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: bq_bankaccount
+    description: "Bank account data replicated from Databricks into BigQuery."
+    columns:
+      - name: ACCOUNT_ID
+        tests:
+          - not_null
+          - unique
+      - name: DISTRICT_ID
+        tests:
+          - not_null
