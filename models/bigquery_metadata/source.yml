@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: dqlabs
+    database: main
+    schema: dqlabs
+    tables:
+      - name: bankaccount
+      - name: bankdistrict
