@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: stg_claims
+    description: "Staging model for claims data"
+    columns:
+      - name: CLAIM_ID
+        tests:
+          - not_null          # fails if CLAIM_ID is null
+          - unique            # fails if CLAIM_ID duplicates
+
+      - name: STATUS
+        tests:
+          - not_null
+          - accepted_values:  # fails if STATUS has other than OPEN/CLOSED
+              values: ['OPEN', 'CLOSED']
+
+      - name: CLAIM_TYPE
+        tests:
+          - accepted_values:  # fails if CLAIM_TYPE outside ALLOWED types
+              values: ['AUTO', 'HEALTH', 'LIFE']
+
+      - name: CLAIM_DATE
+        tests:
+          - not_null
+
+      - name: POLICY_NUMBER
+        tests:
+          - not_null
+          - unique
+
+      - name: CUSTOMER_ID
+        tests:
+          - relationships:    # fails if CUSTOMER_ID not present in stg_customers
+              to: ref('stg_customers')
+              field: CUSTOMER_ID
+
