@@ -2,10 +2,14 @@ version: 2
 
 sources:
   - name: dqlabs
-    schema: main
+    database: main          # first part
+    schema: dqlabs          # second part
     tables:
       - name: bankdistrict
+        description: "Raw table containing district-level reference data."
       - name: bankaccount
+        description: "Raw table containing bank account details."
+
 
 models:
   - name: stg_bankdistrict
