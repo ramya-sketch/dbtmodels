@@ -67,4 +67,4 @@ SELECT
   ORDER_VALUE_CATEGORY,
   CURRENT_TIMESTAMP() AS LOADED_AT,
   '{{ invocation_id }}' AS DBT_RUN_ID
-FROM base
+FROM baseg

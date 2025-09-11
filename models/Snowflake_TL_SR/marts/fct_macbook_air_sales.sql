@@ -137,4 +137,4 @@ SELECT
   -- Metadata
   CURRENT_TIMESTAMP() as LOADED_AT,
   '{{ invocation_id }}' as DBT_RUN_ID
-FROM final_macbook_air 
+FROM final_macbook_airj 
