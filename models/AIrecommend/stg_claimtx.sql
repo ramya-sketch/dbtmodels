@@ -1,5 +1,5 @@
 with stg_claimtx as (select
-    ,CLAIM_ID,
+    CLAIM_ID,
     TX_ID 
 from DQLABS_QA.ZTEST.CLAIM_TX)
 
