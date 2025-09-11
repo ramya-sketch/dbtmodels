@@ -49,7 +49,7 @@ deduplicated_data AS (
       PARTITION BY RECORD_ID 
       ORDER BY "DATE" DESC, TOTAL_AMOUNT DESC
     ) as rn
-  FROM source_dataddS
+  FROM source_data
 )
 
 SELECT 
