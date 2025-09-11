@@ -16,5 +16,5 @@ SELECT
     SALE_YEAR,
     CURRENT_TIMESTAMP() AS LOADED_AT,
     '{{ invocation_id }}' AS DBT_RUN_ID
-FROM fct_saless
+FROM fct_sale
 WHERE SALE_YEAR IS NOT NULL 
