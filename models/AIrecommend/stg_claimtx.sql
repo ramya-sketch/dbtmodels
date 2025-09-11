@@ -1,6 +1,6 @@
 with stg_claimtx as (select
-    claim_id,
-    accident_date   -- ❌ missing comma
-from DQLABS_QA.ZTEST.CLAIMTX)
+    ,CLAIM_ID,
+    TX_ID 
+from DQLABS_QA.ZTEST.CLAIM_TX)
 
 select * from stg_claimtx
