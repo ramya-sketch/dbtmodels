@@ -2,14 +2,13 @@ version: 2
 
 sources:
   - name: dqlabs
-    database: main          # first part
-    schema: dqlabs          # second part
+    database: main
+    schema: dqlabs
     tables:
       - name: bankdistrict
         description: "Raw table containing district-level reference data."
       - name: bankaccount
         description: "Raw table containing bank account details."
-
 
 models:
   - name: stg_bankdistrict
@@ -41,8 +40,9 @@ models:
         description: "Foreign key linking the account to a district."
         tests:
           - relationships:
-              to: ref('stg_bankdistrict')
-              field: DISTRICT_ID
+              arguments:
+                to: ref('stg_bankdistrict')
+                field: DISTRICT_ID
       - name: PARSEDDATE
         description: "Parsed transaction date for easier time-based reporting."
       - name: FREQUENCY
