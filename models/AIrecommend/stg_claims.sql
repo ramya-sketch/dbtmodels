@@ -1,5 +1,5 @@
 {{ config(
-    materialized = 'table'   -- use table so data is materialized and testable
+    materialized = 'table' 
 ) }}
 
 select
