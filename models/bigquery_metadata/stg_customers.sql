@@ -1,6 +1,7 @@
+{{ config(materialized='table') }}
 select
-    id as customer_id,
+    customer_id,
     first_name,
-    last_name
+    last_name,
 
 from `bionic-genre-363105`.SADBT.customers1
