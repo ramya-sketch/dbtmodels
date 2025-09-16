@@ -22,10 +22,10 @@ with claims as (
 claim_tx as (
     select
         CLAIM_ID,
-        TRANSACTION_ID,
-        TRANSACTION_DATE,
-        TRANSACTION_AMOUNT,
-        TRANSACTION_TYPE,
+        TX_ID,
+        TX_DATE,
+        TX_AMOUNT,
+        TX_TYPE,
         CREATED_DATE as TX_CREATED_DATE,
         UPDATED_DATE as TX_UPDATED_DATE
     from {{ ref('stg_claimstx') }}
