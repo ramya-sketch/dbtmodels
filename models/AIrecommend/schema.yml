@@ -5,6 +5,7 @@ models:
     description: "Staging model for claims data001"
     columns:
       - name: CLAIM_ID
+        description: "This attribute contains all consumer claim id's"
         tests:
           - not_null          # fails if CLAIM_ID is null
           - unique            # fails if CLAIM_ID duplicates
