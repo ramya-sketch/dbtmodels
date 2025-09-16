@@ -4,4 +4,4 @@ select
     order_date,
     status
 
-from `dbt-tutorial`.jaffle_shop.orders
+from `bionic-genre-363105`.dbt_core.stg_orders
