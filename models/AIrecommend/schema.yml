@@ -84,19 +84,12 @@ models:
         description: "Identifier of the policy related to the claim."
       - name: CLAIM_DATE
         description: "Date when the claim was filed."
-      - name: TRANSACTION_ID
+      - name: TX_ID
         description: "Unique identifier of the related claim transaction."
-      - name: TRANSACTION_DATE
+      - name: TX_DATE
         description: "Date of the transaction."
-      - name: TRANSACTION_AMOUNT
+      - name: TX_AMOUNT
         description: "Monetary value of the transaction."
-      - name: TRANSACTION_TYPE
+      - name: TX_TYPE
         description: "Category/type of transaction."
-      - name: CLAIM_CREATED_DATE
-        description: "Creation date of the claim record."
-      - name: CLAIM_UPDATED_DATE
-        description: "Last updated timestamp for the claim record."
-      - name: TX_CREATED_DATE
-        description: "Creation date of the transaction record."
-      - name: TX_UPDATED_DATE
-        description: "Last updated timestamp for the transaction record."
+
