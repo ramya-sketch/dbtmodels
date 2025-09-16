@@ -3,4 +3,4 @@ select
     first_name,
     last_name
 
-from `dbt-tutorial`.jaffle_shop.customers1
+from `bionic-genre-363105`.SADBT.customers1

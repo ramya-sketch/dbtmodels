@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: customers
+  - name: fct_customers
     description: One record per customer
     columns:
       - name: customer_id
@@ -21,7 +21,7 @@ models:
           - unique
           - not_null
 
-  - name: stg_orders
+  - name: stg_orders1
     description: This model cleans up order data
     columns:
       - name: order_id
