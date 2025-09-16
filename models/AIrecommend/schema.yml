@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: stg_claims
-    description: "Staging model for claims data"
+    description: "Staging model for claims data00011"
     columns:
       - name: CLAIM_ID
         tests:
