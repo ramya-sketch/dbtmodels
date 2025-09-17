@@ -3,10 +3,10 @@ version: 2
 models:
   - name: stg_claims
     description: >
-      The claims staging model provides a standardized view of raw insurance claim data.
+      The claims staging model provides a standardized view of raw insurance claim data yes.
     columns:
       - name: CLAIM_ID
-        description: "Edited description"
+        description: "Edited description for claim_id"
         tests:
           - not_null          # fails if CLAIM_ID is null
           - unique            # fails if CLAIM_ID duplicates
