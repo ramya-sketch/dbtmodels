@@ -53,16 +53,16 @@ models:
         description: "Foreign key to the claim header."
         tests:
           - not_null
-      - name: TRANSACTION_ID
+      - name: TX_ID
         description: "Unique identifier for the claim transaction."
         tests:
           - unique
           - not_null
-      - name: TRANSACTION_DATE
+      - name: TX_DATE
         description: "Date of the transaction."
-      - name: TRANSACTION_AMOUNT
+      - name: TX_AMOUNT
         description: "Amount of the claim transaction."
-      - name: TRANSACTION_TYPE
+      - name: TX_TYPE
         description: "Type of transaction (e.g., Payment, Adjustment)."
       - name: CREATED_DATE
         description: "Record creation timestamp."
