@@ -8,7 +8,7 @@ SELECT
     status,
     loyaltypoints AS loyalty_points,
     addressid AS address_id,
-    stret,
+    street,
     city,
     state,
     postalcode AS postal_code,
