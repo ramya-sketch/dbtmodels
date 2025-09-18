@@ -28,7 +28,7 @@ SELECT
 
     -- Cap loyalty points at 10,000
     CASE 
-        WHEN t.loyalty_points > 10000 THEN 10000
+        WHEN t.loyalty_points > 10 THEN 10000
         ELSE t.loyalty_points
     END AS loyalty_points
 

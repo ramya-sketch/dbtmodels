@@ -8,9 +8,10 @@ SELECT
     status,
     loyaltypoints AS loyalty_points,
     addressid AS address_id,
-    street,
+    stret,
     city,
     state,
     postalcode AS postal_code,
-    country
+    countryddd
 FROM DQLABS_QA.staging.customer_full
+
