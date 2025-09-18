@@ -14,3 +14,4 @@ SELECT
     postalcode AS postal_code,
     countryddd
 FROM DQLABS_QA.staging.customer_full
+
