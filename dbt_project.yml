@@ -45,7 +45,6 @@ models:
     property_model:
       +materialized: view
     redshift_models:
-      schema: dbt_core
       +materialized: table
     snowflake_model:
       schema: REPORTING
