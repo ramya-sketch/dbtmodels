@@ -61,7 +61,7 @@ WITH macbook_air_sales AS (
     TOTAL_AMOUNT * 0.1 as ESTIMATED_PROFIT_MARGIN,
     TOTAL_AMOUNT * 0.05 as ESTIMATED_COMMISSION
   FROM {{ ref('stg_retail_sales') }}
-  WHERE LOWER(PRODUCT_NAME) LIKE '%macbook air%'  -- Keep filter here only
+  WHERE LOWER(PRODUCT_NAME) LIKE '%macbook air%'
     AND CATEGORY = 'Electronics'
     AND QUANTITY > 0
     AND UNIT_PRICE > 0

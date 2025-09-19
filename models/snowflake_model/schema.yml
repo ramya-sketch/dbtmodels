@@ -13,5 +13,5 @@ models:
 
   - name: employee_sales_vw
     tags: ["production", "analytics"]  # Corrected tag placement
-    description: "A view showing employee sales data"
+    description: "A view showing employee sales dataa"
 

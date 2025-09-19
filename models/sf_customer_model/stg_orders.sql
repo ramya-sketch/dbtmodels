@@ -1,4 +1,4 @@
 with stg_orders as (
     SELECT CUSTOMER_ID, ORDER_ID FROM DQLABS_QA.DBT_CORE.STG_ORDERS
 )
-select * from stg_orders where STATUS = 'returned'
+select * from STG_ORDERS

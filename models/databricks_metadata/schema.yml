@@ -1,0 +1,49 @@
+version: 2
+
+sources:
+  - name: dqlabs
+    database: main
+    schema: dqlabs
+    tables:
+      - name: bankdistrict
+        description: "Raw table containing district-level reference data."
+      - name: bankaccount
+        description: "Raw table containing bank account details."
+
+models:
+  - name: stg_bankdistrict
+    description: "Staging table for bank districts, containing city, state, and district reference data."
+    columns:
+      - name: DISTRICT_ID
+        description: "Unique identifier for the district."
+        tests:
+          - not_null
+          - unique
+      - name: CITY
+        description: "City associated with the district."
+      - name: STATE_NAME
+        description: "Full state name."
+      - name: STATE_ABBREV
+        description: "Two-letter state abbreviation."
+      - name: DIVISION
+        description: "Geographic division grouping states."
+
+  - name: stg_bankaccount
+    description: "Staging table for bank accounts, containing account-level details with time and frequency data."
+    columns:
+      - name: ACCOUNT_ID
+        description: "Unique identifier for the bank account."
+        tests:
+          - not_null
+          - unique
+      - name: DISTRICT_ID
+        description: "Foreign key linking the account to a district."
+        tests:
+          - relationships:
+              arguments:
+                to: ref('stg_bankdistrict')
+                field: DISTRICT_ID
+      - name: PARSEDDATE
+        description: "Parsed transaction date for easier time-based reporting."
+      - name: FREQUENCY
+        description: "Frequency of account usage (e.g., monthly, weekly)."
