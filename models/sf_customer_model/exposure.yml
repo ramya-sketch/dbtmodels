@@ -14,3 +14,5 @@ exposures:
     owner:
       name: Data & Analytics Team
       email: praveen@dqlabs.ai
+    
+    tags: ["customer", "dashboard", "executive"]
