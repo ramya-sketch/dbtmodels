@@ -10,6 +10,8 @@ exposures:
 
     depends_on:
       - ref('customerai_dbt_incr')
+      - ref('stg_orders')
+      - ref('stg_customer')
 
     owner:
       name: Data & Analytics Team
