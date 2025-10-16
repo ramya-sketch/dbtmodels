@@ -1,7 +1,7 @@
 version: 2
 
 exposures:
-  - name: tableau_dbt_stg_reports_sheet1
+  - name: tableau_dbt_customerai_incr
     type: dashboard
     maturity: high
     url: http://dqlabs-tableau.dqlabs.ai/views/DBT_STG_REPORTS/Sheet1
