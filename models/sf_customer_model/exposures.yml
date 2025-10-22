@@ -14,7 +14,7 @@ exposures:
       - ref('stg_customer')
 
     owner:
-      name: Data & Analytics Team
+      name: Data & Analytics Team Updated Owner
       email: praveen@dqlabs.ai
     
-    tags: ["customer", "dashboard", "executive"]
+    tags: ["customer", "dashboard", "executive","New TAGS"]
