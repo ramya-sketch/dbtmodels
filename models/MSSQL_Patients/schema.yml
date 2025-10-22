@@ -1,0 +1,164 @@
+version: 2
+
+models:
+  - name: patients
+    description: "Transformed and enriched patient data with calculated fields and data quality metrics"
+    tests:
+      # Row count tests
+      - dbt_utils.row_count_between:
+          min_value: 1
+          max_value: 2000
+      
+      # Data freshness test
+      - dbt_utils.recency:
+          datepart: day
+          field: dbt_updated_at
+          interval: 1
+      
+    columns:
+      - name: patient_id
+        description: "Unique identifier for each patient"
+        tests:
+          - unique
+          - not_null
+          - dbt_utils.not_empty_string
+          - dbt_utils.accepted_range:
+              min_value: 1
+              max_value: 3180
+      
+      - name: first_name
+        description: "Patient's first name"
+        tests:
+          - not_null
+      
+      - name: last_name
+        description: "Patient's last name"
+        tests:
+          - not_null
+      
+      - name: full_name
+        description: "Concatenated first and last name"
+      
+      - name: email
+        description: "Patient's email address"
+
+      
+      - name: email_domain
+        description: "Domain extracted from email address"
+
+      
+      - name: phone_number
+
+      
+      - name: date_of_birth
+        description: "Patient's date of birth"
+
+      
+      - name: age
+        description: "Calculated age from date of birth"
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 80
+          - dbt_utils.expression_is_true:
+              expression: "age >= 0"
+          - dbt_utils.expression_is_true:
+              expression: "age <= 80"
+      
+      - name: age_group
+        description: "Age group categorization (Under 18, 18-30, 31-50, 51-65, Over 65)"
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - dbt_utils.accepted_values:
+              values: ['Under 18', '18-30', '51-65', 'Over 65', 'Unknown']
+      
+      - name: address
+        description: "Patient's address"
+
+      - name: gender
+        description: "Patient's gender"
+
+      
+      - name: gender_code
+        description: "Abbreviated gender code (M/F/O/U)"
+
+      
+      - name: insurance_provider
+        description: "Patient's insurance provider"
+
+      
+      - name: insurance_category
+        description: "Insurance provider category (Blue Cross Family, Government, Commercial, Other)"
+
+      
+      - name: insurance_policy_number
+        description: "Patient's insurance policy number"
+
+      
+      - name: date_registered
+        description: "Date when patient registered"
+
+      
+      - name: registration_year
+
+      
+      - name: registration_month
+        description: "Month of registration (numeric)"
+
+      
+      - name: registration_month_name
+        description: "Month of registration (text)"
+
+      
+      - name: registration_recency
+        description: "Registration recency category (Last 30 days, Last 90 days, Last year, Older than 1 year)"
+
+      
+      - name: primary_doctor_id
+        description: "ID of patient's primary doctor"
+
+      
+      - name: data_quality_status
+        description: "Overall data quality status (Complete/Incomplete)"
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - dbt_utils.accepted_values:
+              values: ['Complete', 'Incomplete']
+      
+      - name: data_quality_score
+        description: "Data quality score (0 = perfect, higher = more issues)"
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 10
+          - dbt_utils.expression_is_true:
+              expression: "data_quality_score >= 0"
+          - dbt_utils.expression_is_true:
+              expression: "data_quality_score <= 10"
+      
+      - name: dbt_updated_at
+        description: "Timestamp when dbt model was last updated"
+
+
+  - name: patients_summary
+    description: "Daily aggregated patient metrics and trends"
+
+    
+    columns:
+      - name: summary_date
+
+      
+      - name: total_patients
+        description: "Total number of patients registered on this date"
+
+      
+      - name: data_completeness_percentage
+        description: "Percentage of complete patient records"
+
+      
+      - name: month_over_month_growth_pct
+        description: "Month-over-month growth percentage"
