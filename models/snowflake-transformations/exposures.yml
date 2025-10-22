@@ -1,20 +1,21 @@
 version: 2
 
 exposures:
+
   - name: customer_dashboard
-    label: "Executive Customer Dashboard"   # Display label in dbt docs
-    type: dashboard                        # dashboard | notebook | ml | application | analysis
-    maturity: high                         # low | medium | high
-    url: "https://bi.company.com/dashboards/customer"   # link to dashboard/app/notebook
+    label: "Executive Customer Dashboard"
+    type: dashboard
+    maturity: high
+    url: "https://10az.online.tableau.com/#/site/dbtlabspartner/workbooks/customer-dashboard"
     description: |
-      This dashboard tracks customer orders, tickets, and payments
+      This dashboard tracks customer orders, tickets, and payments,
       and is used by executives to monitor key KPIs.
 
     owner:
       name: Jane Doe
       email: jane.doe@example.com
 
-    tags: ["customer", "dashboard", "executive"]   # helps organize exposures
+    tags: ["customer", "dashboard", "executive"]
 
     depends_on:
       - ref('dim_customer')
@@ -22,33 +23,13 @@ exposures:
       - ref('customer_tickets')
       - ref('order_payments')
 
-    # Optional configurations
     meta:
       department: "Sales Analytics"
       priority: "P1"
       tool: "Tableau"
       refresh_schedule: "Daily 8 AM UTC"
-
-  - name: churn_analysis_notebook
-    label: "Churn Analysis Notebook"
-    type: notebook
-    maturity: medium
-    url: "https://databricks.com/workspace/notebooks/churn-analysis"
-    description: |
-      A Jupyter/Databricks notebook that uses transformed customer data
-      to build and test churn prediction models.
-
-    owner:
-      name: ML Team
-      email: ml-team@example.com
-
-    tags: ["ml", "notebook", "churn"]
-
-    depends_on:
-      - ref('customer_full')
-      - ref('customer_tickets')
-
-    meta:
-      department: "Data Science"
-      model_type: "classification"
-      last_validated: "2025-09-01"
+      tableau:
+        server_url: "https://10az.online.tableau.com"
+        site: "dbtlabspartner"
+        token_name: "DBT_test"           # 👈 Your Tableau token name
+        token_secret: "Io4YcBktRnyOEVCLKhoESA==:ipYTQv9wZAqz43CfwwscJAPvWhaH19Zs"    # 👈 Your Tableau token secret (real secret goes here)
