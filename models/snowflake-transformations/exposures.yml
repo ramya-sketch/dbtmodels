@@ -2,7 +2,7 @@ version: 2
 
 exposures:
 
-  - name: customer_dashboard
+  - #name: customer_dashboard
     label: "Executive Customer Dashboard"
     type: dashboard
     maturity: high
