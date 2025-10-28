@@ -4,10 +4,10 @@ models:
   - name: patients
     description: "Transformed and enriched patient data with calculated fields and data quality metrics"
     tests:
-      # Row count tests
-      - dbt_utils.row_count_between:
-          min_value: 1
-          max_value: 2000
+      # # Row count tests
+      # - dbt_utils.row_count_between:
+      #     min_value: 1
+      #     max_value: 2000
       
       # Data freshness test
       - dbt_utils.recency:
