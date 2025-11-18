@@ -17,11 +17,10 @@ select
     loan.payments,
     loan.purpose,
     loan.status,
-    client.client_id,
-    client.first_name,
-    client.last_name,
-    client.email,
-    client.phone_number
+    client.CLIENT_ID,
+    client.FIRST,
+    client.LAST,
+    client.EMAIL
 from loan
 left join client
     on loan.account_id = client.client_id
