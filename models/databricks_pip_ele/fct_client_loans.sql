@@ -24,4 +24,4 @@ select
     client.phone_number
 from loan
 left join client
-    on loan.account_id = client.account_id
+    on loan.account_id = client.client_id
