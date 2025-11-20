@@ -11,7 +11,7 @@ with source_data as (
         Loan_Type,
         CreditScore,
         Updated_Date
-    from {{ source('sales', 'Personal_Loan_Data') }}
+    from {{ source('synapse_dqlabs', 'Personal_Loan_Data') }}
 ),
 
 renamed as (
