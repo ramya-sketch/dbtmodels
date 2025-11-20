@@ -5,7 +5,7 @@ with source_data as (
         [Country],
         [ISO Code],
         [Dialing Code]
-    from {{ source('sales', 'country_codes_sample') }}
+    from {{ source('synapse_dqlabs', 'country_codes_sample') }}
 ),
 
 renamed as (
