@@ -4,7 +4,7 @@ exposures:
   - name: tableau_dbt_customerai_incr
     type: dashboard
     maturity: high
-    url: http://dqlabs-tableau.dqlabs.ai/views/DBT_STG_REPORTS/Sheet1
+    url: https://prod-in-a.online.tableau.com/#/site/wamgxkymmilmcygkbh-37030d7501/views/DBT_CLOUD_CUSTOMERAI_INCR/Sheet1
     description: |
       Tableau sheet visualizing customer and order data using the customerai_dbt_incr model.
 
@@ -16,4 +16,4 @@ exposures:
       name: Data & Analytics Team Updated Owner
       email: praveen@dqlabs.ai
     
-    tags: ["customer", "dashboard", "executive","New TAGS"]
+    tags: ["customer", "dashboard", "executive","Updated TAGS",NEW_TAG_WITHUPDATED]
