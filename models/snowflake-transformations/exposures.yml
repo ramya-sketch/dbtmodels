@@ -2,13 +2,12 @@ version: 2
 
 
 exposures:
-  - type: dashboard
+  - name: customer_dashboard
+    type: dashboard
     maturity: high
     owner:
-      name: Jane Doe
-      email: jane.doe@example.com
+      name: data_team
 
-    tags: ["customer", "dashboard", "executive"]
 
     depends_on:
       - ref('dim_customer')
