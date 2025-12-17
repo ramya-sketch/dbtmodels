@@ -1,16 +1,9 @@
 version: 2
 
+
 exposures:
-
-  - #name: customer_dashboard
-    label: "Executive Customer Dashboard"
-    type: dashboard
+  - type: dashboard
     maturity: high
-    url: "https://10az.online.tableau.com/#/site/dbtlabspartner/workbooks/customer-dashboard"
-    description: |
-      This dashboard tracks customer orders, tickets, and payments,
-      and is used by executives to monitor key KPIs.
-
     owner:
       name: Jane Doe
       email: jane.doe@example.com
