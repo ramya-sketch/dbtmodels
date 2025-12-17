@@ -2,6 +2,7 @@
 -- This model demonstrates how to use ref() to reference the patients table
 {{
     config(
+        enabled=false
         materialized="view",
         indexes=[
             {"columns": ["age_group"]},
