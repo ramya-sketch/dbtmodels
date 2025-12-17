@@ -22,7 +22,8 @@ exposures:
       - ref('fct_customer_orders')
       - ref('customer_tickets')
       - ref('order_payments')
-      - ref('rd_consolidated_vw.sql')
+      - ref('rd_consolidated_vw.sql') 
+      
 
     meta:
       department: "Sales Analytics"
