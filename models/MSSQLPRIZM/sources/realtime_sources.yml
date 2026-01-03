@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: dbt_raw
+    database: dqlabs
+    schema: dbt_raw
+    tables:
+      - name: orders_stream
+      - name: payments_stream
+      - name: customers_stream

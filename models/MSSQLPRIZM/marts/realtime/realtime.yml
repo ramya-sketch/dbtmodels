@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: fct_orders_realtime
+    description: "Fact table for orders (real-time)"
+  - name: fct_payments_realtime
+    description: "Fact table for payments (real-time)"
+  - name: dim_customers_realtime
+    description: "Customer dimension table (real-time)"
