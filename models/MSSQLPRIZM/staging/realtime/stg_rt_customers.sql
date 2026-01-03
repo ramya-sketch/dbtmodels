@@ -1,17 +1,25 @@
 {{ config(
     materialized='incremental',
-    unique_key='customer_id'
+    unique_key='CUSTOMER_ID'
 ) }}
 
-select
-    customer_id,
-    name,
-    email,
-    updated_at,
-    ingested_at
-from {{ source('dbt_raw', 'customers_stream') }}
-where customer_id is not null
+with latest_customers as (
+    select *,
+           row_number() over (
+             partition by CUSTOMER_ID
+             order by INGESTED_AT desc
+           ) as rn
+    from {{ source('raw_dbt', 'customers_stream') }}
+)
 
+select
+    CUSTOMER_ID,
+    NAME,
+    EMAIL,
+    UPDATED_AT,
+    INGESTED_AT
+from latest_customers
+where rn = 1
 {% if is_incremental() %}
-  and ingested_at > (select max(ingested_at) from {{ this }})
+and INGESTED_AT > (select max(INGESTED_AT) from {{ this }})
 {% endif %}
