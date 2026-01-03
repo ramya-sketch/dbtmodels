@@ -1,8 +1,8 @@
-# Project metadata
-name: dbttest                  # main project name (lowercase & underscores)
+# dbt_project.yml
+name: dbttest
 version: '1.0.0'
 config-version: 2
-profile: dbttest               # your profile name
+profile: dbttest
 
 # Paths
 model-paths: ["models"]
@@ -12,12 +12,12 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
-target-path: "target"  # compiled SQL
+target-path: "target"
 clean-targets:
   - "target"
   - "dbt_packages"
 
-# Default materialization (can be overridden in individual models)
+# Default materialization
 models:
   dbttest:
 
@@ -43,7 +43,6 @@ models:
       +schema: CUSTOMERAI
       +materialized: view
 
-
     Demo_models:
       +schema: TARGET_DEMO
       +materialized: view
@@ -53,18 +52,18 @@ models:
       +materialized: view
 
     snowflake-transformations:
-      tags: ["snowflake-transformations"]
+      +tags: ["snowflake-transformations"]
       +schema: REPORTING
       +materialized: view
 
-    Snowflake_TL_SR: 
+    Snowflake_TL_SR:
       +materialized: view
       +schema: DBT_MODLES
 
     # ----- New Real-Time Pipeline Models -----
-    dbt_realtime_orders:
+    MSSQLPRIZM:
       staging:
-        realtime:
+        realtime:           # <-- matches your folder exactly
           +schema: staging_rt
           +materialized: table
       intermediate:
