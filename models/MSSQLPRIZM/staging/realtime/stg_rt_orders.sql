@@ -1,21 +1,19 @@
 {{ config(
     materialized='incremental',
-    unique_key='event_id'
+    unique_key='order_id'
 ) }}
 
-select
-    event_id,
-    order_id,
-    customer_id,
-    status,
-    amount,
-    event_time,
-    ingested_at
-from {{ source('dbt_raw', 'orders_stream') }}
-where order_id is not null
-  and amount >= 0
-  and status in ('CREATED','CONFIRMED','CANCELLED','COMPLETED')
+with source_data as (
+    select *
+    from {{ source('raw_dbt', 'orders_stream') }}
+    where order_id is not null
+      and amount >= 0
+      and status in ('CREATED', 'CONFIRMED', 'SHIPPED', 'DELIVERED')
+      and event_time <= current_timestamp()
+)
 
+select *
+from source_data
 {% if is_incremental() %}
-  and ingested_at > (select max(ingested_at) from {{ this }})
+where event_time > (select max(event_time) from {{ this }})
 {% endif %}

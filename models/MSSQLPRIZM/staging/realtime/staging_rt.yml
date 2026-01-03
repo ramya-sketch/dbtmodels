@@ -1,9 +1,10 @@
 version: 2
 
-models:
-  - name: stg_rt_orders
-    description: "Cleaned real-time orders"
-  - name: stg_rt_payments
-    description: "Cleaned real-time payments"
-  - name: stg_rt_customers
-    description: "Cleaned real-time customers"
+sources:
+  - name: dbt_raw          # <-- must match what your model uses
+    database: DQLABS
+    schema: RAW_DBT        # <-- your actual schema in Snowflake
+    tables:
+      - name: customers_stream
+      - name: orders_stream
+      - name: payments_stream
