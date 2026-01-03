@@ -23,7 +23,7 @@ models:
 
     # ----- Old / Existing Batch Models -----
     DQ_QA_Module:
-      schema: dqlabs
+      +schema: dqlabs
       +materialized: view
 
     finance_model:
