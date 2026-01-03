@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: stg_rt_orders
+    description: "Cleaned real-time orders"
+  - name: stg_rt_payments
+    description: "Cleaned real-time payments"
+  - name: stg_rt_customers
+    description: "Cleaned real-time customers"

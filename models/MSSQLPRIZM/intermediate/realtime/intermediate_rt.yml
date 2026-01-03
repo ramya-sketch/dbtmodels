@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: int_rt_order_activity
+    description: "Latest order status joined with payments"
+    columns:
+      - name: order_id
+        description: "Order identifier"
+      - name: customer_id
+        description: "Customer identifier"
+      - name: latest_status
+        description: "Latest order status"
+      - name: last_order_event_time
+        description: "Timestamp of last order event"
+      - name: total_paid
+        description: "Total amount paid for the order"
