@@ -1,27 +1,23 @@
 version: 2
 
-exposures:
 
+exposures:
   - name: customer_dashboard
-    label: "Executive Customer Dashboard"
     type: dashboard
     maturity: high
-    url: "https://10az.online.tableau.com/#/site/dbtlabspartner/workbooks/customer-dashboard"
-    description: |
-      This dashboard tracks customer orders, tickets, and payments,
-      and is used by executives to monitor key KPIs.
-
     owner:
-      name: Jane Doe
-      email: jane.doe@example.com
+      name: data_team
+    config:
+      enabled: false
 
-    tags: ["customer", "dashboard", "executive"]
 
     depends_on:
       - ref('dim_customer')
       - ref('fct_customer_orders')
       - ref('customer_tickets')
       - ref('order_payments')
+      - ref('rd_consolidated_vw.sql') 
+      
 
     meta:
       department: "Sales Analytics"

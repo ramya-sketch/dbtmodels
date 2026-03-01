@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: raw_dbt             # <-- this must match what your model is calling
+    database: DQLABS
+    schema: RAW_DBT
+    tables:
+      - name: customers_stream
+      - name: orders_stream
+      - name: payments_stream
