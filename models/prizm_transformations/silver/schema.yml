@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: customer_enriched
+    description: "Silver table with customers enriched with order metrics."
+  - name: employee_enriched
+    description: "Silver table with employees enriched with order metrics."
+  - name: orders_enriched
+    description: "Silver table with orders enriched with order item metrics."
+  - name: order_items_enriched
+    description: "Silver table with order items enriched with product information."
+  - name: products_enriched
+    description: "Silver table with product info and sales metrics."
