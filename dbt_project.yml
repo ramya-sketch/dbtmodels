@@ -21,56 +21,70 @@ clean-targets:
 models:
   dbttest:
 
-    # ----- Old / Existing Batch Models -----
-    DQ_QA_Module:
-      +schema: dqlabs
-      +materialized: view
+    # # ----- Old / Existing Batch Models -----
+    # DQ_QA_Module:
+    #   +schema: dqlabs
+    #   +materialized: view
 
-    finance_model:
-      +materialized: view
+    # finance_model:
+    #   +materialized: view
 
-    property_model:
-      +materialized: view
+    # property_model:
+    #   +materialized: view
 
-    redshift_models:
-      +materialized: table
+    # redshift_models:
+    #   +materialized: table
 
-    snowflake_model:
-      +schema: REPORTING
-      +materialized: view
+    # snowflake_model:
+    #   +schema: REPORTING
+    #   +materialized: view
 
-    sf_customer_model:
-      +schema: CUSTOMERAI
-      +materialized: view
+    # sf_customer_model:
+    #   +schema: CUSTOMERAI
+    #   +materialized: view
 
-    Demo_models:
-      +schema: TARGET_DEMO
-      +materialized: view
+    # Demo_models:
+    #   +schema: TARGET_DEMO
+    #   +materialized: view
 
-    Pipeline_Obs:
-      +schema: banking_data_target
-      +materialized: view
+    # Pipeline_Obs:
+    #   +schema: banking_data_target
+    #   +materialized: view
 
-    snowflake-transformations:
-      +tags: ["snowflake-transformations"]
-      +schema: REPORTING
-      +materialized: view
+    # snowflake-transformations:
+    #   +tags: ["snowflake-transformations"]
+    #   +schema: REPORTING
+    #   +materialized: view
 
-    Snowflake_TL_SR:
-      +materialized: view
-      +schema: DBT_MODLES
+    # Snowflake_TL_SR:
+    #   +materialized: view
+    #   +schema: DBT_MODLES
 
-    # ----- New Real-Time Pipeline Models -----
-    MSSQLPRIZM:
-      staging:
-        realtime:           # <-- matches your folder exactly
-          +schema: staging_rt
-          +materialized: table
-      intermediate:
-        realtime:
-          +schema: intermediate_rt
-          +materialized: table
-      marts:
-        realtime:
-          +schema: marts_rt
-          +materialized: table
+    # # ----- New Real-Time Pipeline Models -----
+    # MSSQLPRIZM:
+    #   staging:
+    #     realtime:           # <-- matches your folder exactly
+    #       +schema: staging_rt
+    #       +materialized: table
+    #   intermediate:
+    #     realtime:
+    #       +schema: intermediate_rt
+    #       +materialized: table
+    #   marts:
+    #     realtime:
+    #       +schema: marts_rt
+    #       +materialized: table
+
+    # ----- prizm_Trasfromations -----
+
+    prizm_Trasfromations:
+
+      silver:
+        +schema: SILVER
+        +materialized: table
+        +tags: ['silver']
+
+      gold:
+        +schema: GOLD
+        +materialized: table
+        +tags: ['gold']
