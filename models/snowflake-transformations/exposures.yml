@@ -1,0 +1,31 @@
+version: 2
+
+
+exposures:
+  - name: customer_dashboard
+    type: dashboard
+    maturity: high
+    owner:
+      name: data_team
+    config:
+      enabled: false
+
+
+    depends_on:
+      - ref('dim_customer')
+      - ref('fct_customer_orders')
+      - ref('customer_tickets')
+      - ref('order_payments')
+      - ref('rd_consolidated_vw.sql') 
+      
+
+    meta:
+      department: "Sales Analytics"
+      priority: "P1"
+      tool: "Tableau"
+      refresh_schedule: "Daily 8 AM UTC"
+      tableau:
+        server_url: "https://10az.online.tableau.com"
+        site: "dbtlabspartner"
+        token_name: "DBT_test"           # 👈 Your Tableau token name
+        token_secret: "Io4YcBktRnyOEVCLKhoESA==:ipYTQv9wZAqz43CfwwscJAPvWhaH19Zs"    # 👈 Your Tableau token secret (real secret goes here)
