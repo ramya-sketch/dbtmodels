@@ -1,4 +1,3 @@
-# dbt_project.yml
 name: dbttest
 version: '1.0.0'
 config-version: 2
@@ -20,6 +19,9 @@ clean-targets:
 # Default materialization
 models:
   dbttest:
+
+    +meta:
+      description: "all the models from different projects in UI"
 
     # # ----- Old / Existing Batch Models -----
     # DQ_QA_Module:
