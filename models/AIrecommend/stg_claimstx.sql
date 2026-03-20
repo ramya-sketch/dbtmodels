@@ -1,5 +1,5 @@
 with stg_claimstx as (
-    select TX_TYPE, TX_AMOUNT
+    select *
     from DQLABS_QA.ZTEST.CLAIM_TX
 )
 select * from stg_claimstx
