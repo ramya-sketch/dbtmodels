@@ -6,7 +6,13 @@ models:
       owner: sales_team@company.com
     description: >
       The claims staging model provides a standardized view of raw insurance claim data new.
-    columns: 
+    columns:
+      - name: CLAIM_ID
+        description: "CLAIM_ID"
+        tests:
+          - not_null
+          - unique
+ 
       - name: STATUS
         description: "Current processing status of the claim (e.g., OPEN, CLOSED, PENDING)."
         tests:
