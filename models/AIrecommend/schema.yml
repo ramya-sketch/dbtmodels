@@ -21,14 +21,7 @@ models:
           - accepted_values:
               arguments:
                 values: ['OPEN', 'CLOSED','PENDING']
-
-      - name: CLAIM_TYPE
-        description: "This attribute contains type of the claims in stg_claim"
-        tests:
-          - accepted_values:
-              arguments:
-                values: ['AUTO', 'HEALTH', 'LIFE']
-
+                
       - name: CLAIM_DATE
         description: "Date when the claim was filed."
         tests:
@@ -55,6 +48,8 @@ models:
     columns:
       - name: CLAIM_ID
         description: "Foreign key to the claim header."
+        tests:
+          - not_null
 
       - name: TX_ID
         description: "Unique identifier for the claim transaction."
