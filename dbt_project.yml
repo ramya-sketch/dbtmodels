@@ -1,5 +1,5 @@
 # dbt_project.yml
-name: dbttest
+name: prizm_check
 version: '1.0.0'
 config-version: 2
 profile: dbttest
