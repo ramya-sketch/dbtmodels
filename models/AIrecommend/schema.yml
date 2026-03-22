@@ -13,14 +13,6 @@ models:
           - not_null
           - unique
 
-      - name: STATUS
-        description: "Current processing status of the claim (e.g., OPEN, CLOSED, PENDING)."
-        tests:
-          - not_null
-          - unique
-          - accepted_values:
-              arguments:
-                values: ['OPEN', 'CLOSED','PENDING']
 
       - name: CLAIM_TYPE
         description: "This attribute contains type of the claims in stg_claim"
@@ -62,8 +54,6 @@ models:
           - unique
           - not_null
 
-      - name: TX_DATE
-        description: "Date of the transaction."
       - name: TX_AMOUNT
         description: "Amount of the claim transaction."
       - name: TX_TYPE
@@ -84,8 +74,6 @@ models:
           - not_null
       - name: CLAIM_NUMBER
         description: "Business claim number."
-      - name: POLICY_NUMBER
-        description: "Identifier of the policy related to the claim."
       - name: CLAIM_DATE
         description: "Date when the claim was filed."
       - name: TX_ID
