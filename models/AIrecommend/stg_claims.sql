@@ -9,6 +9,6 @@ select
     CLAIM_TYPE,
     STATUS,
     accident_date, 
-    created_date
+    created_date,
     reported_date
 from DQLABS_QA.ZTEST.CLAIM
