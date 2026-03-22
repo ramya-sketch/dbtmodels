@@ -29,10 +29,6 @@ models:
               arguments:
                 values: ['AUTO', 'HEALTH', 'LIFE']
 
-      - name: CLAIM_DATE
-        description: "Date when the claim was filed."
-        tests:
-          - not_null
 
       - name: POLICY_NUMBER
         description: "Unique identifier for the policy."
@@ -64,8 +60,6 @@ models:
 
       - name: TX_DATE
         description: "Date of the transaction."
-      - name: TX_AMOUNT
-        description: "Amount of the claim transaction."
       - name: TX_TYPE
         description: "Type of transaction (e.g., Payment, Adjustment)."
       - name: CREATED_DATE
@@ -88,8 +82,6 @@ models:
         description: "Identifier of the policy related to the claim."
       - name: CLAIM_DATE
         description: "Date when the claim was filed."
-      - name: TX_ID
-        description: "Unique identifier of the related claim transaction."
       - name: TX_DATE
         description: "Date of the transaction."
       - name: TX_AMOUNT
