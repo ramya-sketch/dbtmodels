@@ -5,6 +5,7 @@ on:
     paths:
       - '**/*.sql'
       - '**/*.yml'
+      - '**/*.csv'
  
 permissions:
   contents: read
@@ -26,6 +27,7 @@ jobs:
           files: |
             **/*.sql
             **/*.yml
+            **/*.csv
           include_removed: true
           include_renamed: true
           separator: ","
