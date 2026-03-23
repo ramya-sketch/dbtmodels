@@ -50,7 +50,7 @@ jobs:
             "repo": "$GITHUB_REPO",
             "pr_number": "$PR_NUMBER",
             "github_token": "$GITHUB_TOKEN",
-            "prizm_configurable_keys": "indirect_asset_count,direct_asset_count,direct_asset_list, indirect_asset_list, direct_column_count, sql_column_changes,indirect_column_list,direct_column_list,total_impacted_models,total_impacted_assets",
+            "prizm_configurable_keys": "indirect_asset_count,direct_asset_count,direct_asset_list, indirect_asset_list, direct_column_count, sql_column_changes,indirect_column_list,direct_column_list,total_impacted_models,total_impacted_assets,yml_column_changes",
             "changed_files_list": "$CHANGED_FILES",
             "client_link_url": "$CLIENT_LINK_URL"
           }
