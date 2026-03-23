@@ -3,7 +3,7 @@ version: 2
 models:
   - name: stg_claims
     description: >
-      The claims staging model provides a standardized view of raw insurance claim data new.
+      The claims staging model provides a standardized view of raw insurance claim data new way.
     config:
       meta:
         owner: 'vinaya@dqlabs.ai'
