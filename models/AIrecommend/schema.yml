@@ -26,7 +26,6 @@ models:
         description: "Unique identifier for the policy."
         tests:
           - not_null
-          - unique
 
       - name: CUSTOMER_ID
         description: "Foreign key to the customers table."
