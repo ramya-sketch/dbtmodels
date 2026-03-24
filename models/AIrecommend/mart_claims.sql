@@ -1,25 +1,17 @@
-{{ config(
-    materialized = 'table',
-    tags = ['mart']
-) }}
+{{ config(materialized="table", tags=["mart"]) }}
 
 select
-    CLAIM_ID,
-    CLAIM_NUMBER,
-    POLICY_NUMBER,
-    STATE,
-    STATUS,
+    claim_id,
+    claim_number,
+    policy_number,
+    state,
+    status,
 
-    count(TX_ID) as total_transactions,
-    sum(TX_AMOUNT) as total_claim_amount,
+    count(tx_id) as total_transactions,
+    sum(tx_amount) as total_claim_amount,
 
-    min(CLAIM_DATE) as claim_date,
-    max(TX_DATE) as last_transaction_date
+    min(claim_date) as claim_date,
+    max(tx_date) as last_transaction_date
 
-from {{ ref('fact_claims') }}
-group by
-    CLAIM_ID,
-    CLAIM_NUMBER,
-    POLICY_NUMBER,
-    STATE,
-    STATUS
+from {{ ref("fct_claims") }}
+group by claim_id, claim_number, policy_number, state, status
