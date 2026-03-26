@@ -1,5 +1,6 @@
 {{ config(
-    materialized = 'table',
+    materialized = 'incremental',
+    unique_key = 'CLAIM_ID',
     tags = ['fact']
 ) }}
 
@@ -17,6 +18,10 @@ with claims as (
         CREATED_DATE,
         UPDATED_DATE
     from {{ ref('stg_claims') }}
+
+    {% if is_incremental() %}
+        where UPDATED_DATE > (select max(UPDATED_DATE) from {{ this }})
+    {% endif %}
 ),
 
 claim_tx as (
@@ -26,8 +31,12 @@ claim_tx as (
         TX_DATE,
         TX_AMOUNT,
         TX_TYPE,
-        CREATED_DATE as TX_CREATED_DATE,
+        CREATED_DATE as TX_CREATED_DATE
     from {{ ref('stg_claimstx') }}
+
+    {% if is_incremental() %}
+        where CREATED_DATE > (select max(TX_CREATED_DATE) from {{ this }})
+    {% endif %}
 )
 
 select
@@ -47,8 +56,8 @@ select
     tx.TX_TYPE,
 
     c.CREATED_DATE as CLAIM_CREATED_DATE,
-    c.UPDATED_DATE as CLAIM_UPDATED_DATE,
-    tx.TX_CREATED_DATE,
+    c.UPDATED_DATE,
+    tx.TX_CREATED_DATE
 
 from claims c
 left join claim_tx tx
