@@ -8,6 +8,7 @@ select
     POLICY_NUMBER,
     CLAIM_DATE,
     CLAIM_TYPE,
+    STATE,
     STATUS,
     ACCIDENT_DATE, 
     CREATED_DATE, 
