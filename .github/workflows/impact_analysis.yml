@@ -36,20 +36,14 @@ jobs:
       - name: Find nearest dbt_project.yml for changed files
         id: find_dbt_project
         run: |
-         echo "🚀 Starting dbt_project.yml detection..."
+         FILES="${{ steps.changes.outputs.all_changed_files }}"
 
-          FILES="${{ steps.changes.outputs.all_changed_files }}"
-          echo "Changed files: $FILES"
-          
           NEAREST_PROJECT=""
           
-          # ❗ If no changed files, fallback directly to root
+          # If no changed files, fallback to root
           if [ -z "$FILES" ]; then
-            echo "⚠️ No changed files detected. Checking root directly..."
-          
             if [ -f "dbt_project.yml" ]; then
               NEAREST_PROJECT="dbt_project.yml"
-              echo "✅ Found at root"
             fi
           
           else
@@ -58,30 +52,18 @@ jobs:
             for file in "${FILE_ARRAY[@]}"; do
               [ -z "$file" ] && continue
           
-              echo "🔍 Processing file: $file"
-          
               DIR=$(dirname "$file")
           
               while true; do
-                echo "Checking: $DIR/dbt_project.yml"
-          
                 if [ -f "$DIR/dbt_project.yml" ]; then
                   NEAREST_PROJECT="$DIR/dbt_project.yml"
-                  echo "✅ Found nearest dbt_project.yml: $NEAREST_PROJECT"
                   break 2
                 fi
           
-                # 🚨 If reached repo root → check root explicitly and stop
                 if [ "$DIR" = "." ]; then
-                  echo "Reached repo root. Checking root dbt_project.yml..."
-          
                   if [ -f "dbt_project.yml" ]; then
                     NEAREST_PROJECT="dbt_project.yml"
-                    echo "✅ Found at repo root"
-                  else
-                    echo "❌ No dbt_project.yml in root"
                   fi
-          
                   break
                 fi
           
@@ -90,12 +72,10 @@ jobs:
             done
           fi
           
-          # 🎯 Final output
           if [ -n "$NEAREST_PROJECT" ]; then
-              echo "dbt_project_path=$NEAREST_PROJECT" >> $GITHUB_OUTPUT
+            echo "dbt_project_path=$NEAREST_PROJECT" >> $GITHUB_OUTPUT
           else
-              echo "❌ No dbt_project.yml found anywhere"
-              echo "dbt_project_path=" >> $GITHUB_OUTPUT
+            echo "dbt_project_path=" >> $GITHUB_OUTPUT
           fi
 
       - name: Run PR impact analysis via dbt_mcp API
