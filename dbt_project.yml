@@ -90,3 +90,10 @@ models:
         +schema: GOLD
         +materialized: table
         +tags: ['gold']
+
+    # ----- AIrecommend -----
+    
+    AIrecommend:
+      +schema: STAGING
+      +database: DQLABS_QA
+      +materialized: table
