@@ -36,34 +36,47 @@ jobs:
       - name: Find nearest dbt_project.yml for changed files
         id: find_dbt_project
         run: |
-          FILES="${{ steps.changes.outputs.all_changed_files }}"
+          FILES="${{ steps.changes.outputs.all_files }}"
+          echo "Changed files: $FILES"
+
           NEAREST_PROJECT=""
-      
-          # Split by comma (tj-actions uses comma separator)
-          IFS=',' read -ra FILE_ARRAY <<< "$FILES"
-      
-          for file in "${FILE_ARRAY[@]}"; do
-            # Skip empty strings
-            if [ -z "$file" ]; then
-              continue
-            fi
-      
-            # Walk up directories to find nearest dbt_project.yml
-            DIR=$(dirname "$file")
-            while [ "$DIR" != "." ] && [ "$DIR" != "/" ]; do
-              if [ -f "$DIR/dbt_project.yml" ]; then
-                NEAREST_PROJECT="$DIR/dbt_project.yml"
-                break 2  # Stop searching, we found the nearest project
-              fi
-              DIR=$(dirname "$DIR")
+
+          # 1️⃣ First: check root directly (fast path)
+          if [ -f "dbt_project.yml" ]; then
+            echo "Found dbt_project.yml at root"
+            NEAREST_PROJECT="dbt_project.yml"
+          fi
+
+          # 2️⃣ If not found, search from changed files upward
+          if [ -z "$NEAREST_PROJECT" ]; then
+            IFS=',' read -ra FILE_ARRAY <<< "$FILES"
+
+            for file in "${FILE_ARRAY[@]}"; do
+              [ -z "$file" ] && continue
+
+              DIR=$(dirname "$file")
+
+              while true; do
+                if [ -f "$DIR/dbt_project.yml" ]; then
+                  NEAREST_PROJECT="$DIR/dbt_project.yml"
+                  break 2
+                fi
+
+                if [ "$DIR" = "." ] || [ "$DIR" = "/" ]; then
+                  break
+                fi
+
+                DIR=$(dirname "$DIR")
+              done
             done
-          done
-      
+          fi
+
+          # 3️⃣ Output result
           if [ -n "$NEAREST_PROJECT" ]; then
-            echo "Found nearest dbt_project.yml at: $NEAREST_PROJECT"
+            echo "✅ Found dbt_project.yml at: $NEAREST_PROJECT"
             echo "dbt_project_path=$NEAREST_PROJECT" >> $GITHUB_OUTPUT
           else
-            echo "No dbt_project.yml found for changed files"
+            echo "❌ No dbt_project.yml found"
             echo "dbt_project_path=" >> $GITHUB_OUTPUT
           fi
 
