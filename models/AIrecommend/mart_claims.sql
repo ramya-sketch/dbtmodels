@@ -1,4 +1,4 @@
-{{ config(materialized="table", tags=["mart"]) }}
+{{ config(materialized="view", tags=["mart"]) }}
 
 select
     claim_id,
