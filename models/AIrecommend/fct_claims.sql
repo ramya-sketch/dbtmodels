@@ -1,8 +1,9 @@
 {{ config(
-    materialized='incremental',
+    materialized='custom_incremental',
     unique_key=['CLAIM_ID','TX_ID']
 ) }}
 
+-- Step 1: Source claims
 with source_data as (
     select
         CLAIM_ID,
@@ -18,6 +19,7 @@ with source_data as (
     from {{ ref('stg_claims') }}
 ),
 
+-- Step 2: Deduplicate claim transactions
 claim_tx as (
     select *
     from (
@@ -33,10 +35,11 @@ claim_tx as (
                 order by CREATED_DATE desc
             ) as rn
         from {{ ref('stg_claimstx') }}
-    ) t
+    )
     where rn = 1
 ),
 
+-- Step 3: Join claims and transactions
 final as (
     select
         s.CLAIM_ID,
@@ -58,26 +61,14 @@ final as (
     from source_data s
     left join claim_tx tx
         on s.CLAIM_ID = tx.CLAIM_ID
-),
-
-deduped as (
-    select *
-    from (
-        select * from (
-            select *,
-                   row_number() over (
-                       partition by CLAIM_ID, TX_ID
-                       order by UPDATED_DATE desc
-                   ) as rn
-            from final
-        ) inner_t
-        where rn = 1
-    ) t
 )
 
+-- Step 4: Apply incremental filter
 select *
-from deduped
-
+from final
 {% if is_incremental() %}
-    where UPDATED_DATE > (select coalesce(max(UPDATED_DATE), '1900-01-01') from {{ this }})
+where UPDATED_DATE > (
+    select coalesce(max(UPDATED_DATE), '1900-01-01')
+    from {{ this }}
+)
 {% endif %}
