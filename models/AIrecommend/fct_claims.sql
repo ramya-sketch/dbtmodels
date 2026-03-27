@@ -63,14 +63,16 @@ final as (
 deduped as (
     select *
     from (
-        select *,
-               row_number() over (
-                   partition by CLAIM_ID, TX_ID
-                   order by UPDATED_DATE desc
-               ) as rn
-        from final
+        select * from (
+            select *,
+                   row_number() over (
+                       partition by CLAIM_ID, TX_ID
+                       order by UPDATED_DATE desc
+                   ) as rn
+            from final
+        ) inner_t
+        where rn = 1
     ) t
-    where rn = 1
 )
 
 select *
