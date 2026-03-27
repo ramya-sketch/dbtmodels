@@ -13,25 +13,29 @@ create or replace table {{ tmp_relation }} as
 
 {% set rows_affected = 0 %}
 
+{# Step 2: Check if target exists #}
 {% set existing_relation = adapter.get_relation(
     database=target_relation.database,
     schema=target_relation.schema,
     identifier=target_relation.identifier
 ) %}
 
-{# Step 2: Create or Merge #}
+{# Step 3: Create or Merge #}
 {% if existing_relation is none %}
+    {# First run → create table #}
     {% call statement('create_table') %}
         create table {{ target_relation }} as
         select * from {{ tmp_relation }}
     {% endcall %}
 
+    {# Count rows #}
     {% set count_result = run_query("select count(*) from " ~ tmp_relation) %}
     {% if count_result is not none %}
         {% set rows_affected = count_result.columns[0].values()[0] %}
     {% endif %}
 
 {% else %}
+    {# Incremental → Merge #}
     {% call statement('merge') %}
         merge into {{ target_relation }} as target
         using {{ tmp_relation }} as source
@@ -88,15 +92,22 @@ create or replace table {{ tmp_relation }} as
             source.TX_TYPE,
             source.TX_CREATED_DATE,
             source.LOAD_TS
-        )
+        );
     {% endcall %}
+
+    {# Count rows affected by merge #}
+    {% set count_result = run_query("select count(*) from " ~ tmp_relation) %}
+    {% if count_result is not none %}
+        {% set rows_affected = count_result.columns[0].values()[0] %}
+    {% endif %}
 {% endif %}
 
-{# Step 3: Drop temp table #}
+{# Step 4: Drop temp table #}
 {% call statement('drop_tmp') %}
 drop table if exists {{ tmp_relation }}
 {% endcall %}
 
+{# Step 5: Return rows affected #}
 {% do return({
     "relations": [target_relation],
     "adapter_response": {"rows_affected": rows_affected}
