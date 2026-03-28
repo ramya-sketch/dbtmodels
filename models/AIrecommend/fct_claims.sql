@@ -45,7 +45,6 @@ final as (
         s.CLAIM_ID,
         tx.TX_ID,
         s.CLAIM_NUMBER,
-        s.POLICY_NUMBER,
         s.CLAIM_TYPE,
         s.STATUS,
         s.STATE,
