@@ -62,13 +62,3 @@ final as (
     left join claim_tx tx
         on s.CLAIM_ID = tx.CLAIM_ID
 )
-
--- Step 4: Apply incremental filter
-select *
-from final
-{% if is_incremental() %}
-where UPDATED_DATE > (
-    select coalesce(max(UPDATED_DATE), '1900-01-01')
-    from {{ this }}
-)
-{% endif %}
