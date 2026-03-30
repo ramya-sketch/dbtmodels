@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: stg_claim
+    description: Staging mirror of DQLABS_QA.ZTEST.CLAIM
+  - name: stg_claim_tx
+    description: Staging mirror of DQLABS_QA.ZTEST.CLAIM_TX
+  - name: fct_claim_transactions
+    description: Claim grain enriched with transaction lines from CLAIM_TX

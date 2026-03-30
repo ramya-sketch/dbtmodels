@@ -1,0 +1,28 @@
+name: claim_analytics
+version: '1.0.0'
+config-version: 2
+profile: runfailure_project
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Persist adapter rows_affected per executed model into Snowflake after each `dbt run`.
+on-run-start:
+  - "{{ ensure_rows_affected_audit_table() }}"
+
+on-run-end:
+  - "{{ log_rows_affected_from_run(results) }}"
+
+models:
+  runfailure_project:
+    +database: DQLABS_QA
+    +schema: RUNFAILURE
+    +materialized: table
