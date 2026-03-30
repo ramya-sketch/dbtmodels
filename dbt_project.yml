@@ -3,6 +3,16 @@ version: '1.0.0'
 config-version: 2
 profile: dbttest
 
+# rows_affected in artifacts: dbt writes target/run_results.json (note: run_results, plural).
+# Each executed node has adapter_response.rows_affected (often -1 for views; Snowflake fills
+# this after DML). See https://docs.getdbt.com/reference/artifacts/run-results-json
+#
+# Quick view (jq): jq '.results[] | {unique_id, status, rows: .adapter_response.rows_affected}' target/run_results.json
+# Flat file helper: python scripts/extract_rows_affected_from_run_results.py
+# Optional copy to top-level result key: same script with --inject
+
+require-dbt-version: [">=1.2.0", "<3.0.0"]
+
 # Paths
 model-paths: ["models"]
 analysis-paths: ["analyses"]
