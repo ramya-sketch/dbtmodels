@@ -26,8 +26,10 @@ clean-targets:
   - "target"
   - "dbt_packages"
 
-# Set claim_analytics_audit: true in dbt Cloud (Environment variables / dbt vars) to log rows_affected to DQLABS_QA.RUNFAILURE.DBT_ROWS_AFFECTED_LOG
+# rows_affected_console: prints one line per model to dbt stdout (dbt Cloud job logs / CLI).
+# claim_analytics_audit: true → also insert each model into DQLABS_QA.RUNFAILURE.DBT_ROWS_AFFECTED_LOG
 vars:
+  rows_affected_console: true
   claim_analytics_audit: false
 
 on-run-start:

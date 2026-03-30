@@ -7,3 +7,9 @@ models:
     description: Staging mirror of DQLABS_QA.ZTEST.CLAIM_TX
   - name: fct_claim_transactions
     description: Claim grain enriched with transaction lines from CLAIM_TX
+
+  - name: claim_analytics_pipeline_health
+    description: >
+      Append one row per dbt run with staging/fact row counts, distinct claims on the fact,
+      ZTEST.CLAIM source totals, and “today” activity on the source.
+      net_* columns compare to the prior row for incremental / merge health without using run_results.rows_affected.

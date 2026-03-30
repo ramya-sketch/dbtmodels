@@ -7,6 +7,7 @@ See: https://docs.getdbt.com/reference/artifacts/run-results-json
 
 Usage:
   python scripts/extract_rows_affected_from_run_results.py
+  python scripts/extract_rows_affected_from_run_results.py --print
   python scripts/extract_rows_affected_from_run_results.py --inject
 """
 
@@ -34,6 +35,12 @@ def main() -> None:
         type=Path,
         default=Path("target"),
         help="dbt target directory (default: ./target)",
+    )
+    parser.add_argument(
+        "--print",
+        action="store_true",
+        dest="print_table",
+        help="Print relation_name, rows_affected, status to stdout (human-readable)",
     )
     parser.add_argument(
         "--inject",
@@ -71,6 +78,12 @@ def main() -> None:
     }
     summary_path.write_text(json.dumps(summary, indent=2), encoding="utf-8")
     print(f"Wrote {summary_path} ({len(flat)} result rows).")
+
+    if args.print_table:
+        print("relation_name\trows_affected\tstatus\tunique_id")
+        for r, row in zip(results, flat):
+            rel = r.get("relation_name") or ""
+            print(f"{rel}\t{row['rows_affected']}\t{r.get('status')}\t{r.get('unique_id')}")
 
     if args.inject:
         backup = args.target_dir / "run_results.json.bak"
