@@ -1,7 +1,7 @@
 name: claim_analytics
 version: '1.0.0'
 config-version: 2
-profile: runfailure_project
+profile: claim_analytics
 
 model-paths: ["models"]
 macro-paths: ["macros"]
@@ -22,7 +22,7 @@ on-run-end:
   - "{{ log_rows_affected_from_run(results) }}"
 
 models:
-  runfailure_project:
+  claim_analytics:
     +database: DQLABS_QA
     +schema: RUNFAILURE
     +materialized: table

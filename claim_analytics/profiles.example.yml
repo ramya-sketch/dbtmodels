@@ -1,7 +1,7 @@
 # Copy to ~/.dbt/profiles.yml (merge this output into your profiles file).
 # Set SNOWFLAKE_PASSWORD in the environment — do not commit real passwords.
 
-runfailure_project:
+claim_analytics:
   target: dev
   outputs:
     dev:
