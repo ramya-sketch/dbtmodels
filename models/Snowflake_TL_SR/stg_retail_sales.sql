@@ -53,7 +53,14 @@ deduplicated_data AS (
 )
 
 SELECT 
- *
+  RECORD_ID,
+  "DATE",
+  STORE_ID,
+  PRODUCT_NAME,
+  QUANTITY,
+  UNIT_PRICE,
+  TOTAL_AMOUNT,
+  REGION
 FROM deduplicated_data
-WHERE rn = 2 aa tst
+WHERE rn = 1 aa tst
 
