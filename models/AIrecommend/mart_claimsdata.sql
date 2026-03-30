@@ -13,5 +13,5 @@ select
     min(claim_date) as claim_date,
     max(tx_date) as last_transaction_date
 
-from {{ ref("fct_claims") }}
+from {{ ref("fct_claimsdata") }}
 group by claim_id, claim_number, policy_number, state, status

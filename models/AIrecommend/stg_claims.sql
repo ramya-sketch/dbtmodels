@@ -1,7 +1,7 @@
 {{ config(
     materialized = 'table'
 ) }}
- 
+
 select
     CLAIM_ID,
     CLAIM_NUMBER,
