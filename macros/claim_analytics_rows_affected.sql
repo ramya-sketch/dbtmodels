@@ -63,3 +63,15 @@
     {% endfor %}
   {% endif %}
 {% endmacro %}
+
+{% macro claim_analytics_hooks_run_start() %}
+  {% if var('claim_analytics_audit', false) %}
+    {{ ensure_rows_affected_audit_table() }}
+  {% endif %}
+{% endmacro %}
+
+{% macro claim_analytics_hooks_run_end(results) %}
+  {% if var('claim_analytics_audit', false) %}
+    {{ log_rows_affected_from_run(results) }}
+  {% endif %}
+{% endmacro %}

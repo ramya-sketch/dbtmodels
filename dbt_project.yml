@@ -16,6 +16,16 @@ clean-targets:
   - "target"
   - "dbt_packages"
 
+# Set claim_analytics_audit: true in dbt Cloud (Environment variables / dbt vars) to log rows_affected to DQLABS_QA.RUNFAILURE.DBT_ROWS_AFFECTED_LOG
+vars:
+  claim_analytics_audit: false
+
+on-run-start:
+  - "{{ claim_analytics_hooks_run_start() }}"
+
+on-run-end:
+  - "{{ claim_analytics_hooks_run_end(results) }}"
+
 # Default materialization
 models:
   dbttest:
@@ -96,4 +106,9 @@ models:
     AIrecommend:
       +schema: STAGING
       +database: DQLABS_QA
+      +materialized: table
+
+    claim_analytics:
+      +database: DQLABS_QA
+      +schema: RUNFAILURE
       +materialized: table
