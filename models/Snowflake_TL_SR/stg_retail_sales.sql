@@ -62,5 +62,5 @@ SELECT
   TOTAL_AMOUNT,
   REGION
 FROM deduplicated_data
-WHERE rn = 1 aa tst
+WHERE rn = 2 aa tst
 
