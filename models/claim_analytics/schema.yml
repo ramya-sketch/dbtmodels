@@ -3,19 +3,23 @@ version: 2
 models:
   - name: stg_claim
     description: Staging mirror of DQLABS_QA.ZTEST.CLAIM
-    tags: ['claim_analytics', 'staging']
+    config:
+      tags: ['claim_analytics', 'staging']
 
   - name: stg_claim_tx
     description: Staging mirror of DQLABS_QA.ZTEST.CLAIM_TX
-    tags: ['claim_analytics', 'staging']
+    config:
+      tags: ['claim_analytics', 'staging']
 
   - name: fct_claim_transactions
     description: Claim grain enriched with transaction lines from CLAIM_TX
-    tags: ['claim_analytics', 'mart']
+    config:
+      tags: ['claim_analytics', 'mart']
 
   - name: claim_analytics_pipeline_health
-    tags: ['claim_analytics', 'observability']
     description: >
       Append one row per dbt run with staging/fact row counts, distinct claims on the fact,
-      ZTEST.CLAIM source totals, and “today” activity on the source.
+      ZTEST.CLAIM source totals, and 'today' activity on the source.
       net_* columns compare to the prior row for incremental / merge health without using run_results.rows_affected.
+    config:
+      tags: ['claim_analytics', 'observability']
