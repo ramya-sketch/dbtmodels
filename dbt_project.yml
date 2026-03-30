@@ -124,3 +124,5 @@ models:
       +database: DQLABS_QA
       +schema: RUNFAILURE
       +materialized: table
+      diagnostics:
+        +materialized: view

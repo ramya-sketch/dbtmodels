@@ -23,3 +23,10 @@ models:
       net_* columns compare to the prior row for incremental / merge health without using run_results.rows_affected.
     config:
       tags: ['claim_analytics', 'observability']
+
+  - name: rows_affected_view_probe
+    description: >
+      View built from fct_claim_transactions + stg_claim + stg_claim_tx. Use to validate rows_affected = -1
+      (or null) on views without treating the run as failed. Select with tag:rows_affected_probe or resource name.
+    config:
+      tags: ['claim_analytics', 'observability', 'rows_affected_probe']
