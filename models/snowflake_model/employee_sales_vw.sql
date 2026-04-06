@@ -38,4 +38,4 @@ INNER JOIN
     ON A.SALESORDERID = B.SALESORDERID
 )
 SELECT * FROM employee_sales_vw
->>>>>>> 9478e17513a8eb14fec2820d81e1cc69f3f7dcd6
+
