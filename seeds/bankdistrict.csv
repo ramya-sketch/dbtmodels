@@ -1,77 +1,77 @@
-CITY,DISTRICT_ID,DIVISION,STATE_ABBREV,STATE_NAME
-New Haven,52,New England,CT,Connecticut
-Yonkers,76,Middle Atlantic,NY,New York
-Rochester,75,Middle Atlantic,NY,New York
-Nashville,11,East South Central,TN,Tennessee
-Denver,7,Mountain,CO,Colorado
-Minneapolis,23,West North Central,MN,Minnesota
-Somerville,71,New England,MA,Massachusetts
-Louisville,15,East South Central,KY,Kentucky
-Birmingham,32,East South Central,AL,Alabama
-Charlotte,4,South Atlantic,NC,North Carolina
-Columbus,3,East North Central,OH,Ohio
-Omaha,21,West North Central,NE,Nebraska
-Salt Lake City,33,Mountain,UT,Utah
-Milwaukee,17,East North Central,WI,Wisconsin
-Houston,54,West South Central,TX,Texas
-Fall River,61,New England,MA,Massachusetts
-Manchester,41,New England,NH,New Hampshire
-Hartford,53,New England,CT,Connecticut
-Cranston,68,New England,RI,Rhode Island
-Baltimore,16,South Atlantic,MD,Maryland
-Brockton,58,New England,MA,Massachusetts
-Honolulu,26,Pacific,HI,Hawaii
-Wichita,25,West North Central,KS,Kansas
-Anchorage,28,Pacific,AK,Alaska
-Boise,30,Mountain,ID,Idaho
-Newark,29,Middle Atlantic,NJ,New Jersey
-Norwalk,63,New England,CT,Connecticut
-Lynn,60,New England,MA,Massachusetts
-Billings,42,Mountain,MT,Montana
-Atlanta,19,South Atlantic,GA,Georgia
-Albuquerque,18,Mountain,NM,New Mexico
-Philadelphia,72,Middle Atlantic,PA,Pennsylvania
-Providence,36,New England,RI,Rhode Island
-Lowell,55,New England,MA,Massachusetts
-San Antonio,27,West South Central,TX,Texas
-Cheyenne,45,Mountain,WY,Wyoming
-Seattle,6,Pacific,WA,Washington
-Danbury,67,New England,CT,Connecticut
-Bridgeport,38,New England,CT,Connecticut
-New Bedford,57,New England,MA,Massachusetts
-Kansas City,20,West North Central,MO,Missouri
-Fargo,40,West North Central,ND,North Dakota
-Burlington,49,New England,VT,Vermont
-New Orleans,24,West South Central,LA,Louisiana
-Des Moines,31,West North Central,IA,Iowa
-Newton,65,New England,MA,Massachusetts
-Sioux Falls,35,West North Central,SD,South Dakota
-Virginia Beach,22,South Atlantic,VA,Virginia
-Lawrence,69,New England,MA,Massachusetts
-Charleston,47,South Atlantic,WV,West Virginia
-Chicago,74,East North Central,IL,Illinois
-Portland,44,New England,ME,Maine
-Portland,12,Pacific,OR,Oregon
-Phoenix,64,Mountain,AZ,Arizona
-Los Angeles,70,Pacific,CA,California
-Little Rock,34,West South Central,AR,Arkansas
-Quincy,59,New England,MA,Massachusetts
-New York City,1,Middle Atlantic,NY,New York
-Nashua,62,New England,NH,New Hampshire
-Indianapolis,5,East North Central,IN,Indiana
-Syracuse,77,Middle Atlantic,NY,New York
-Washington,8,South Atlantic,DC,District of Columbia
-Charleston,39,South Atlantic,SC,South Carolina
-Oklahoma City,13,West South Central,OK,Oklahoma
-Jackson,37,East South Central,MS,Mississippi
-Springfield,51,New England,MA,Massachusetts
-New Britain,73,New England,CT,Connecticut
-Cambridge,56,New England,MA,Massachusetts
-Worcester,48,New England,MA,Massachusetts
-Jacksonville,2,South Atlantic,FL,Florida
-Detroit,10,East North Central,MI,Michigan
-Wilmington,43,South Atlantic,DE,Delaware
-Boston,9,New England,MA,Massachusetts
-Warwick,66,New England,RI,Rhode Island
-Buffalo,50,Middle Atlantic,NY,New York
-San Diego,46,Pacific,CA,California
+CITY,DISTRICT_ID,STATE_ABBREV,STATE_NAME,COUNTRY
+New Haven,52,CT,Connecticut,USA
+Yonkers,76,NY,New York,USA
+Rochester,75,NY,New York,USA
+Nashville,11,TN,Tennessee,USA
+Denver,7,CO,Colorado,USA
+Minneapolis,23,MN,Minnesota,USA
+Somerville,71,MA,Massachusetts,USA
+Louisville,15,KY,Kentucky,USA
+Birmingham,32,AL,Alabama,USA
+Charlotte,4,NC,North Carolina,USA
+Columbus,3,OH,Ohio,USA
+Omaha,21,NE,Nebraska,USA
+Salt Lake City,33,UT,Utah,USA
+Milwaukee,17,WI,Wisconsin,USA
+Houston,54,TX,Texas,USA
+Fall River,61,MA,Massachusetts,USA
+Manchester,41,NH,New Hampshire,USA
+Hartford,53,CT,Connecticut,USA
+Cranston,68,RI,Rhode Island,USA
+Baltimore,16,MD,Maryland,USA
+Brockton,58,MA,Massachusetts,USA
+Honolulu,26,HI,Hawaii,USA
+Wichita,25,KS,Kansas,USA
+Anchorage,28,AK,Alaska,USA
+Boise,30,ID,Idaho,USA
+Newark,29,NJ,New Jersey,USA
+Norwalk,63,CT,Connecticut,USA
+Lynn,60,MA,Massachusetts,USA
+Billings,42,MT,Montana,USA
+Atlanta,19,GA,Georgia,USA
+Albuquerque,18,NM,New Mexico,USA
+Philadelphia,72,PA,Pennsylvania,USA
+Providence,36,RI,Rhode Island,USA
+Lowell,55,MA,Massachusetts,USA
+San Antonio,27,TX,Texas,USA
+Cheyenne,45,WY,Wyoming,USA
+Seattle,6,WA,Washington,USA
+Danbury,67,CT,Connecticut,USA
+Bridgeport,38,CT,Connecticut,USA
+New Bedford,57,MA,Massachusetts,USA
+Kansas City,20,MO,Missouri,USA
+Fargo,40,ND,North Dakota,USA
+Burlington,49,VT,Vermont,USA
+New Orleans,24,LA,Louisiana,USA
+Des Moines,31,IA,Iowa,USA
+Newton,65,MA,Massachusetts,USA
+Sioux Falls,35,SD,South Dakota,USA
+Virginia Beach,22,VA,Virginia,USA
+Lawrence,69,MA,Massachusetts,USA
+Charleston,47,WV,West Virginia,USA
+Chicago,74,IL,Illinois,USA
+Portland,44,ME,Maine,USA
+Portland,12,OR,Oregon,USA
+Phoenix,64,AZ,Arizona,USA
+Los Angeles,70,CA,California,USA
+Little Rock,34,AR,Arkansas,USA
+Quincy,59,MA,Massachusetts,USA
+New York City,1,NY,New York,USA
+Nashua,62,NH,New Hampshire,USA
+Indianapolis,5,IN,Indiana,USA
+Syracuse,77,NY,New York,USA
+Washington,8,DC,District of Columbia,USA
+Charleston,39,SC,South Carolina,USA
+Oklahoma City,13,OK,Oklahoma,USA
+Jackson,37,MS,Mississippi,USA
+Springfield,51,MA,Massachusetts,USA
+New Britain,73,CT,Connecticut,USA
+Cambridge,56,MA,Massachusetts,USA
+Worcester,48,MA,Massachusetts,USA
+Jacksonville,2,FL,Florida,USA
+Detroit,10,MI,Michigan,USA
+Wilmington,43,DE,Delaware,USA
+Boston,9,MA,Massachusetts,USA
+Warwick,66,RI,Rhode Island,USA
+Buffalo,50,NY,New York,USA
+San Diego,46,CA,California,USA
