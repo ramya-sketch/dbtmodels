@@ -9,7 +9,7 @@ models:
         owner: 'vinaya@dqlabs.ai'
     columns:
       - name: CLAIM_ID
-        description: "CLAIM_ID"
+        description: "CLAIM_ID check"
         tests:
           - not_null
           - unique
@@ -53,6 +53,9 @@ models:
     description: >
       Staging model for claim transactions.
       Contains financial and event-level transaction details linked to claims.
+    config:
+      meta:
+        owner: "vinaya@dqlabs.ai"
     columns:
       - name: CLAIM_ID
         description: "Foreign key to the claim header."
