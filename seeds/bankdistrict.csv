@@ -1,4 +1,4 @@
-CITY,DISTRICT_ID,DIVISION,STATE_ABBREV,STATE_NAME
+CITY,count,DIVISION,STATE_ABBREV,STATE
 New Haven,52,New England,CT,Connecticut
 Yonkers,76,Middle Atlantic,NY,New York
 Rochester,75,Middle Atlantic,NY,New York
