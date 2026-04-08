@@ -1,6 +1,6 @@
 {{ config(materialized='view') }}
 SELECT 
    city,
-   state,
+   state_name,
    divison
 FROM {{ ref('bankdistricttable') }}
