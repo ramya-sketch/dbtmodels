@@ -126,3 +126,9 @@ models:
       +materialized: table
       diagnostics:
         +materialized: view
+    bank:
+      +database: DQLABS_QA
+      +schema: STAGING
+      +materialized: table
+      diagnostics:
+        +materialized: view        
