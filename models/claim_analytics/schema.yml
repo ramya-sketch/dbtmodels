@@ -1,130 +1,6 @@
 version: 2
 
 models:
-  - name: stg_claims
-    description: >
-      The claims staging model provides a standardized view of raw insurance claim data new way.
-    config:
-      meta:
-        owner: 'vinaya@dqlabs.ai'
-      tags: ['claim_analytics', 'staging']
-    columns:
-      - name: CLAIM_ID
-        description: "CLAIM_ID check"
-        tests:
-          - not_null
-          - unique
-
-      - name: STATUS
-        description: "Current processing status of the claim (e.g., OPEN, CLOSED, PENDING)."
-        tests:
-          - not_null
-          - unique
-          - accepted_values:
-              arguments:
-                values: ['OPEN', 'CLOSED', 'PENDING']
-
-      - name: CLAIM_TYPE
-        description: "This attribute contains type of the claims in stg_claim"
-        tests:
-          - accepted_values:
-              arguments:
-                values: ['AUTO', 'HEALTH', 'LIFE']
-
-      - name: CLAIM_DATE
-        description: "Date when the claim was filed."
-        tests:
-          - not_null
-
-      - name: POLICY_NUMBER
-        description: "Unique identifier for the policy."
-        tests:
-          - not_null
-          - unique
-
-      - name: CUSTOMER_ID
-        description: "Foreign key to the customers table."
-        tests:
-          - relationships:
-              arguments:
-                to: ref('stg_customers')
-                field: CUSTOMER_ID
-
-  - name: stg_claimstx
-    description: >
-      Staging model for claim transactions.
-      Contains financial and event-level transaction details linked to claims.
-    config:
-      meta:
-        owner: "vinaya@dqlabs.ai"
-      tags: ['claim_analytics', 'staging']
-    columns:
-      - name: CLAIM_ID
-        description: "Foreign key to the claim header."
-        tests:
-          - not_null
-
-      - name: TX_ID
-        description: "Unique identifier for the claim transaction."
-        tests:
-          - unique
-          - not_null
-
-      - name: TX_DATE
-        description: "Date of the transaction."
-      - name: TX_AMOUNT
-        description: "Amount of the claim transaction."
-      - name: TX_TYPE
-        description: "Type of transaction (e.g., Payment, Adjustment)."
-      - name: CREATED_DATE
-        description: "Record creation timestamp."
-      - name: UPDATED_DATE
-        description: "Record last updated timestamp."
-
-  - name: claim_volume_audit
-    description: >
-      Append-only audit of row-count changes on DQLABS_QA.ZTEST.CLAIM (via stg_claims).
-      A new row is written only when current_row_count differs from the prior snapshot.
-    columns:
-      - name: current_row_count
-      - name: previous_row_count
-      - name: net_row_change
-      - name: abs_row_movement
-      - name: snapshot_at
-      - name: dbt_invocation_id
-
-  - name: fct_claims_volume_audit
-    description: >
-      Append-one-row-per-dbt-run snapshot of fct_claimsdata volume vs the previous snapshot.
-    columns:
-      - name: current_row_count
-      - name: current_distinct_claim_count
-      - name: previous_row_count
-      - name: previous_distinct_claim_count
-      - name: net_row_change
-      - name: net_distinct_claim_change
-      - name: abs_row_movement
-      - name: volume_changed
-      - name: snapshot_at
-      - name: dbt_invocation_id
-
-  - name: fct_claimsdata
-    description: >
-      Fact model combining claim header data with related claim transactions.
-    config:
-      tags: ['claim_analytics', 'mart']
-    columns:
-      - name: CLAIM_ID
-        tests:
-          - not_null
-      - name: CLAIM_NUMBER
-      - name: POLICY_NUMBER
-      - name: CLAIM_DATE
-      - name: TX_ID
-      - name: TX_DATE
-      - name: TX_AMOUNT
-      - name: TX_TYPE
-
   - name: stg_claim
     description: Staging mirror of DQLABS_QA.ZTEST.CLAIM
     config:
@@ -142,12 +18,15 @@ models:
 
   - name: claim_analytics_pipeline_health
     description: >
-      Append one row per dbt run with staging/fact row counts and health metrics.
+      Append one row per dbt run with staging/fact row counts, distinct claims on the fact,
+      ZTEST.CLAIM source totals, and 'today' activity on the source.
+      net_* columns compare to the prior row for incremental / merge health without using run_results.rows_affected.
     config:
       tags: ['claim_analytics', 'observability']
 
   - name: rows_affected_view_probe
     description: >
-      View built to validate rows_affected behavior on views.
+      View built from fct_claim_transactions + stg_claim + stg_claim_tx. Use to validate rows_affected = -1
+      (or null) on views without treating the run as failed. Select with tag:rows_affected_probe or resource name.
     config:
       tags: ['claim_analytics', 'observability', 'rows_affected_probe']
