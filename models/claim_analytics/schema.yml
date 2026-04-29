@@ -17,7 +17,6 @@ models:
       - name: STATUS
         description: "Current processing status of the claim (e.g., OPEN, CLOSED, PENDING)."
         tests:
-          - is null
           - unique
           - accepted_values:
               arguments:
