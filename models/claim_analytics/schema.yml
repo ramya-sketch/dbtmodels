@@ -5,6 +5,41 @@ models:
     description: Staging mirror of DQLABS_QA.ZTEST.CLAIM
     config:
       tags: ['claim_analytics', 'staging']
+      meta:
+        owner: 'vinaya@dqlabs.ai'
+    columns:
+      - name: CLAIM_ID
+        description: "CLAIM_ID"
+        tests:
+          - not_null
+          - unique
+ 
+      - name: STATUS
+        description: "Current processing status of the claim (e.g., OPEN, CLOSED, PENDING)."
+        tests:
+          - is null
+          - unique
+          - accepted_values:
+              arguments:
+                values: ['OPEN', 'CLOSED','PENDING']
+ 
+      - name: CLAIM_TYPE
+        description: "This attribute contains type of the claims in stg_claim"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['AUTO', 'HEALTH', 'LIFE']
+ 
+      - name: CLAIM_DATE
+        description: "Date when the claim was filed."
+        tests:
+          - not_null
+ 
+      - name: POLICY_NUMBER
+        description: "Unique identifier for the policy."
+        tests:
+          - not_null
+          - unique
 
   - name: stg_claim_tx
     description: Staging mirror of DQLABS_QA.ZTEST.CLAIM_TX
