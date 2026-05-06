@@ -6,7 +6,17 @@
 
 {# MERGE allows one source row per unique_key; CLAIM can repeat CLAIM_ID. #}
 with src as (
-    select *
+    select   CLAIM_ID,
+    CLAIM_NUMBER,
+    POLICY_NUMBER,
+    CLAIM_DATE,
+    CLAIM_TYPE,
+    STATE,
+    STATUS,
+    ACCIDENT_DATE,
+    CREATED_DATE,
+    REPORTED_DATE,
+    UPDATED_DATE
     from {{ source('ztest', 'CLAIM') }}
     {% if is_incremental() %}
         where coalesce(UPDATED_DATE, to_timestamp_ntz('1900-01-01'))

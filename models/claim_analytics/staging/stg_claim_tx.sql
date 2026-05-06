@@ -6,7 +6,7 @@
 
 {# MERGE requires at most one source row per unique_key; CLAIM_TX can repeat keys. #}
 with src as (
-    select *
+    select TX_ID, CLAIM_ID, TX_DATE, TX_AMOUNT, TX_TYPE, TX_CATEGORY, CREATED_DATE
     from {{ source('ztest', 'CLAIM_TX') }}
     {# CLAIM_TX has no UPDATED_DATE; use row / line timestamps from the source. #}
     {% if is_incremental() %}
