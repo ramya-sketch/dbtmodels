@@ -59,13 +59,13 @@ models:
     # redshift_models:
     #   +materialized: table
 
-    # snowflake_model:
-    #   +schema: REPORTING
-    #   +materialized: view
+    snowflake_model:
+      +schema: REPORTING
+      +materialized: view
 
-    # sf_customer_model:
-    #   +schema: CUSTOMERAI
-    #   +materialized: view
+    sf_customer_model:
+      +schema: CUSTOMERAI
+      +materialized: view
 
     # Demo_models:
     #   +schema: TARGET_DEMO
