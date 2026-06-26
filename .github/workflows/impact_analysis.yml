@@ -16,10 +16,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the PR branch with full git history.
+      # Full history is required by changed-files action to compare commits accurately.
       - name: Checkout PR code (head)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      # Detect all DBT-related files that were added, modified,
+      # deleted, or renamed in the pull request.
 
       - name: Get changed DBT files
         id: changes
@@ -32,11 +37,14 @@ jobs:
           include_removed: true
           include_renamed: true
           separator: ","
-
-      - name: Find nearest dbt_project.yml for changed files
+          
+      # Locate the nearest dbt_project.yml file relative to the changed files.
+      # This supports monorepos containing multiple DBT projects.
+      - name: Find dbt_project.yml
         id: find_dbt_project
+        working-directory: ${{ github.workspace }}
         run: |
-         FILES="${{ steps.changes.outputs.all_changed_files }}"
+          FILES="${{ steps.changes.outputs.all_changed_files }}"
 
           NEAREST_PROJECT=""
           
@@ -78,14 +86,22 @@ jobs:
             echo "dbt_project_path=" >> $GITHUB_OUTPUT
           fi
 
+      # Call the DBT MCP impact-analysis API and send:
+      # - PR metadata
+      # - Changed files
+      # - DBT project configuration
+      # - Environment information
+      #
+      # The API returns downstream model and column impact analysis.
+
       - name: Run PR impact analysis via dbt_mcp API
         id: impact-analysis
         env:
           GITHUB_REPO: ${{ github.repository }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          DBT_MCP_BASE_URL: ${{ secrets.DBT_MCP_BASE_URL }}
-          CLIENT_LINK_URL: ${{ secrets.CLIENT_LINK_URL }}
+          DBT_MCP_BASE_URL: ${{ vars.DBT_MCP_BASE_URL }}
+          CLIENT_LINK_URL: ${{ vars.CLIENT_LINK_URL }}
           CHANGED_FILES: ${{ steps.changes.outputs.all_changed_files }},${{ steps.changes.outputs.deleted_files }}
           PRIZM_TOKEN: ${{ secrets.PRIZM_TOKEN }}
           DBT_PROJECT_FILE: ${{ steps.find_dbt_project.outputs.dbt_project_path }}
@@ -111,7 +127,7 @@ jobs:
             "github_token": "$GITHUB_TOKEN",
             "prizm_configurable_keys": "indirect_asset_count,direct_asset_count,direct_asset_list,indirect_asset_list,direct_column_count,sql_column_changes,indirect_column_list,direct_column_list,total_impacted_models,total_impacted_assets,yml_column_changes",
             "changed_files_list": "$CHANGED_FILES",
-            "dbt_environments": "Prizm_QA_Environment",
+            "dbt_environments": "DBT Core Connection",
             "client_link_url": "$CLIENT_LINK_URL",
             "dbt_project_file_content": $DBT_PROJECT_CONTENT
           }
@@ -135,10 +151,12 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
           printf '%s\n' "$RESPONSE" > "$GITHUB_WORKSPACE/impact_api_response.json"
-
+      # Print the impact-analysis response in workflow logs
       - name: Show Summary in Logs
         run: cat "$GITHUB_WORKSPACE/impact_api_response.json"
 
+      # Debug step to verify exactly what files were detected
+      # by the changed-files action.
       - name: Debug changed files
         run: |
           echo "All files: ${{ steps.changes.outputs.all_files }}"
