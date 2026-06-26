@@ -105,7 +105,6 @@ jobs:
           CHANGED_FILES: ${{ steps.changes.outputs.all_changed_files }},${{ steps.changes.outputs.deleted_files }}
           PRIZM_TOKEN: ${{ secrets.PRIZM_TOKEN }}
           DBT_PROJECT_FILE: ${{ steps.find_dbt_project.outputs.dbt_project_path }}
-          DBT_ENVIRONMENTS: 'DBT Core Connection'
 
         run: |
           URL="${DBT_MCP_BASE_URL}/api/v1/dbt/github/pr-impact-analysis"
@@ -127,7 +126,6 @@ jobs:
             "github_token": "$GITHUB_TOKEN",
             "prizm_configurable_keys": "indirect_asset_count,direct_asset_count,direct_asset_list,indirect_asset_list,direct_column_count,sql_column_changes,indirect_column_list,direct_column_list,total_impacted_models,total_impacted_assets,yml_column_changes",
             "changed_files_list": "$CHANGED_FILES",
-            "dbt_environments": "DBT Core Connection",
             "client_link_url": "$CLIENT_LINK_URL",
             "dbt_project_file_content": $DBT_PROJECT_CONTENT
           }
