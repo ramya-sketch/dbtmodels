@@ -2,16 +2,26 @@ version: 2
 
 models:
   - name: flight_passenger
-    description: "passgener by flight"
+    description: "Passenger by flight"
     columns:
-      - name: FlightNumber
-        description: "The unique identifier for the filght"
+      - name: flight_number
+        description: "The unique identifier for the flight"
         tests:
-          - not_null
-          # - unique
-
+          - not_null:
+              config:
+                severity: error
+          # - unique:   # Uncomment if needed
+          
   - name: passenger_airline
-    description: "passenger_airline_vw"
+    description: "Passenger airline view"
+    columns:
+      - name: airline_id
+        description: "Primary key of the airline"
 
   - name: passenger_flight
-    description: "passgener by flight"
+    description: "Passenger flight view"
+    columns:
+      - name: passenger_id
+        description: "Primary key of the passenger"
+      - name: flight_number
+        description: "Foreign key to flight_passenger"

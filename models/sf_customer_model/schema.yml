@@ -2,26 +2,33 @@ version: 2
 
 models:
   - name: stg_orders
+    description: "Staging model for order data."
     columns:
       - name: ORDER_ID
         tests:
           - unique:
-              severity: warn
+              config:
+                severity: warn
           - not_null:
-              severity: warn
+              config:
+                severity: warn
 
       - name: CUSTOMER_ID
         tests:
           - unique:
-              severity: warn
+              config:
+                severity: warn
           - not_null:
-              severity: warn
+              config:
+                severity: warn
 
   - name: stg_customer
     columns:
       - name: CUSTOMER_ID
         tests:
           - unique:
-              severity: warn
+              config:
+                severity: warn
           - not_null:
-              severity: warn
+              config:
+                severity: warn

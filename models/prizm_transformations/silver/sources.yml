@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: dqlabs_qa
+    database: DQLABS_QA
+    schema: BRONZE
+    description: "Bronze layer tables containing raw customer, employee, orders, order_items, and products."
+
+    tables:
+      - name: CUSTOMER
+      - name: EMPLOYEE
+      - name: ORDERS
+      - name: ORDER_ITEMS
+      - name: PRODUCTS

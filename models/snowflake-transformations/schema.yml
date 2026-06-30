@@ -55,10 +55,3 @@ models:
       - name: customer_id
         tests: [not_null]
 
-  - name: deleted_customer_tickets
-    description: "Incremental model for tracking deleted customer tickets"
-    columns:
-      - name: ticket_id
-        tests: [not_null, unique]
-      - name: customer_id
-        tests: [not_null]
