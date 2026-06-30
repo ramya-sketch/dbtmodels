@@ -64,7 +64,6 @@ previous as (
 select
     c.stg_claim_rows,
     c.stg_claim_tx_rows,
-    c.fct_rows,
     c.fct_distinct_claims,
     c.src_claim_rows_total,
     c.src_claim_rows_updated_or_created_today,
