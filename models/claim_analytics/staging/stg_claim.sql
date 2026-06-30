@@ -15,7 +15,7 @@ with src as (
     STATUS,
     CREATED_DATE,
     REPORTED_DATE,
-    UPDATED_DATE,
+    UPDATED_DATE
     from {{ source('ztest', 'CLAIM') }}
     {% if is_incremental() %}
         where coalesce(UPDATED_DATE, to_timestamp_ntz('1900-01-01'))
