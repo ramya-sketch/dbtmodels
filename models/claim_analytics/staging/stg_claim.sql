@@ -13,7 +13,6 @@ with src as (
     CLAIM_TYPE,
     STATE,
     STATUS,
-    ACCIDENT_DATE,
     CREATED_DATE,
     REPORTED_DATE,
     UPDATED_DATE
