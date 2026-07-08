@@ -92,7 +92,7 @@ jobs:
           DBT_ENVIRONMENTS: 'DBT Core Connection'
 
         run: |
-          URL="${DBT_MCP_BASE_URL}/api/v1/integration/dbt/github/pr-impact-analysis"
+          URL="${DBT_MCP_BASE_URL}/api/v1/core/dbt/github/pr-impact-analysis"
           echo "Calling API via POST123: $URL"
 
           DBT_PROJECT_CONTENT="null"
