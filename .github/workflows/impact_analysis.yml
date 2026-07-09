@@ -92,48 +92,85 @@ jobs:
           DBT_ENVIRONMENTS: 'DBT Core Connection'
 
         run: |
-          URL="${DBT_MCP_BASE_URL}/api/v1/core/dbt/github/pr-impact-analysis"
-          echo "Calling API via POST123: $URL"
-
-          DBT_PROJECT_CONTENT="null"
-
-          if [ -n "$DBT_PROJECT_FILE" ] && [ -f "$DBT_PROJECT_FILE" ]; then
-            echo "Reading dbt_project.yml from: $DBT_PROJECT_FILE"
-            DBT_PROJECT_CONTENT=$(jq -Rs . < "$DBT_PROJECT_FILE")
-          else
-            echo "dbt_project.yml not found or path invalid"
-          fi
-
-          PAYLOAD=$(cat <<EOF
-          {
-            "repo": "$GITHUB_REPO",
-            "pr_number": "$PR_NUMBER",
-            "github_token": "$GITHUB_TOKEN",
-            "prizm_configurable_keys": "indirect_asset_count,direct_asset_count,direct_asset_list,indirect_asset_list,direct_column_count,sql_column_changes,indirect_column_list,direct_column_list,total_impacted_models,total_impacted_assets,yml_column_changes",
-            "changed_files_list": "$CHANGED_FILES",
-            "client_link_url": "$CLIENT_LINK_URL",
-            "dbt_project_file_content": $DBT_PROJECT_CONTENT
-          }
-          EOF
-          )
-
-          echo "Payload:"
-          echo "$PAYLOAD"
-
-          RESPONSE=$(curl -s -X POST "$URL" \
-            -H "Content-Type: application/json" \
-            -H "Accept: application/json" \
-            -H "Authorization: Bearer ${PRIZM_TOKEN}" \
-            -d "$PAYLOAD")
-
-          echo "API Response:"
-          printf '%s\n' "$RESPONSE"
-
-          echo "response<<EOF" >> $GITHUB_OUTPUT
-          echo "$RESPONSE" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-          printf '%s\n' "$RESPONSE" > "$GITHUB_WORKSPACE/impact_api_response.json"
+            URL="${DBT_MCP_BASE_URL}/api/v1/core/dbt/github/pr-impact-analysis"
+            echo "Calling API: $URL"
+          
+            DBT_PROJECT_CONTENT="null"
+          
+            if [ -n "$DBT_PROJECT_FILE" ] && [ -f "$DBT_PROJECT_FILE" ]; then
+              echo "Reading dbt_project.yml from: $DBT_PROJECT_FILE"
+              DBT_PROJECT_CONTENT=$(jq -Rs . < "$DBT_PROJECT_FILE")
+            else
+              echo "dbt_project.yml not found or path invalid"
+            fi
+          
+            PAYLOAD=$(cat <<EOF
+            {
+              "repo": "$GITHUB_REPO",
+              "pr_number": "$PR_NUMBER",
+              "github_token": "$GITHUB_TOKEN",
+              "prizm_configurable_keys": "indirect_asset_count,direct_asset_count,direct_asset_list,indirect_asset_list,direct_column_count,sql_column_changes,indirect_column_list,direct_column_list,total_impacted_models,total_impacted_assets,yml_column_changes",
+              "changed_files_list": "$CHANGED_FILES",
+              "client_link_url": "$CLIENT_LINK_URL",
+              "dbt_project_file_content": $DBT_PROJECT_CONTENT
+            }
+            EOF
+            )
+          
+            echo "Payload:"
+            echo "$PAYLOAD"
+          
+            MAX_RETRIES=3
+            RETRY_DELAY=5
+          
+            for ((attempt=1; attempt<=MAX_RETRIES; attempt++)); do
+              echo "==============================="
+              echo "Attempt $attempt of $MAX_RETRIES"
+              echo "==============================="
+          
+              HTTP_STATUS=$(curl -sS \
+                -o "$GITHUB_WORKSPACE/impact_api_response.json" \
+                -w "%{http_code}" \
+                -X POST "$URL" \
+                -H "Content-Type: application/json" \
+                -H "Accept: application/json" \
+                -H "Authorization: Bearer ${PRIZM_TOKEN}" \
+                -d "$PAYLOAD")
+          
+              echo "HTTP Status: $HTTP_STATUS"
+              echo "Response:"
+              cat "$GITHUB_WORKSPACE/impact_api_response.json"
+          
+              # Success
+              if [[ "$HTTP_STATUS" -ge 200 && "$HTTP_STATUS" -lt 300 ]]; then
+                echo "API call succeeded."
+          
+                RESPONSE=$(cat "$GITHUB_WORKSPACE/impact_api_response.json")
+          
+                echo "response<<EOF" >> "$GITHUB_OUTPUT"
+                echo "$RESPONSE" >> "$GITHUB_OUTPUT"
+                echo "EOF" >> "$GITHUB_OUTPUT"
+          
+                exit 0
+              fi
+          
+              # Retry on selected status codes
+              case "$HTTP_STATUS" in
+                401|404|408|429|500|502|503|504)
+                  if [[ "$attempt" -lt "$MAX_RETRIES" ]]; then
+                    echo "Retryable error ($HTTP_STATUS). Waiting ${RETRY_DELAY}s before retry..."
+                    sleep "$RETRY_DELAY"
+                  else
+                    echo "API failed after $MAX_RETRIES attempts."
+                    exit 1
+                  fi
+                  ;;
+                *)
+                  echo "Non-retryable error ($HTTP_STATUS)."
+                  exit 1
+                  ;;
+              esac
+            done
 
       - name: Show Summary in Logs
         run: cat "$GITHUB_WORKSPACE/impact_api_response.json"
