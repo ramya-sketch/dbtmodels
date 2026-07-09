@@ -84,8 +84,8 @@ jobs:
           GITHUB_REPO: ${{ github.repository }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          DBT_MCP_BASE_URL: ${{ secrets.DBT_MCP_BASE_URL }}
-          CLIENT_LINK_URL: ${{ secrets.CLIENT_LINK_URL }}
+          DBT_MCP_BASE_URL: ${{ vars.DBT_MCP_BASE_URL }}
+          CLIENT_LINK_URL: ${{ vars.CLIENT_LINK_URL }}
           CHANGED_FILES: ${{ steps.changes.outputs.all_changed_files }},${{ steps.changes.outputs.deleted_files }}
           PRIZM_TOKEN: ${{ secrets.PRIZM_TOKEN }}
           DBT_PROJECT_FILE: ${{ steps.find_dbt_project.outputs.dbt_project_path }}
