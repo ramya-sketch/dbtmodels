@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: stg_transactions
+  - name: stg_banking_transactions
     columns:
       - name: txn_id
         tests: [unique, not_null]
