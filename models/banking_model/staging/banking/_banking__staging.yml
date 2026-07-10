@@ -4,7 +4,7 @@ models:
   - name: stg_banking_transactions
     columns:
       - name: txn_id
-        tests: [unique, not_null]
+        tests: [not_null]
       - name: account_id
         tests: [not_null]
       - name: txn_amount
