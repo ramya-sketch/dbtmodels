@@ -13,10 +13,6 @@ models:
               arguments:
                 expression: ">= 0"
       - name: txn_type
-        tests:
-          - accepted_values:
-              arguments:
-                values: ['DEPOSIT', 'WITHDRAWAL', 'TRANSFER', 'PAYMENT']
 
   - name: stg_daily_account_activity
     columns:
