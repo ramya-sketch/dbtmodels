@@ -5,9 +5,9 @@ sources:
     database: PRIZM_QA
     schema: BANKING
     tables:
-      - name: transactions
-      - name: daily_transactions
-      - name: aml_transactions
+      - name: transactions_dbt
+      - name: daily_transactions_dbt
+      - name: aml_transactions_dbt
       - name: accounts
         columns:
           - name: account_id

@@ -3,7 +3,7 @@
 with daily as (
 
     select *
-    from {{ source('banking', 'daily_transactions') }}
+    from {{ source('banking', 'daily_transactions_dbt') }}
     order by txn_date desc
     limit 100
 
@@ -12,9 +12,8 @@ with daily as (
 aml as (
 
     select *
-    from {{ source('banking', 'aml_transactions') }}
+    from {{ source('banking', 'aml_transactions_dbt') }}
     order by txn_date desc
-    limit 100
 
 ),
 
