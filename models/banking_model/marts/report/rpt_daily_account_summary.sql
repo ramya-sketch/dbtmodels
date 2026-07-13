@@ -14,7 +14,7 @@ with txn_daily_rollup as (
 ),
 
 activity as (
-    select * from {{ ref('stg_daily_account_activity') }} limit 1000
+    select * from {{ ref('stg_daily_account_activity') }}
 )
 
 select
