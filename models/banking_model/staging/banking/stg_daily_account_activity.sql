@@ -5,7 +5,6 @@ with daily as (
     select *
     from {{ source('banking', 'daily_transactions_dbt') }}
     order by txn_date desc
-    limit 100
 
 ),
 
