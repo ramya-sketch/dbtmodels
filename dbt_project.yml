@@ -132,3 +132,18 @@ models:
       +materialized: table
       diagnostics:
         +materialized: view        
+    
+    banking_model:
+      staging:
+        banking:
+          +database: PRIZM_QA
+          +schema: STAGING
+          +materialized: view
+          +tags: ['banking', 'staging']
+
+      marts:
+        report:
+          +database: PRIZM_QA
+          +schema: REPORT
+          +materialized: table
+          +tags: ['banking', 'report']
