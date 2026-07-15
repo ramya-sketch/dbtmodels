@@ -20,4 +20,4 @@ models:
               arguments:
                 expression: "> 0"
       - name: account_id
-        tests: [not_null]
+        tests: [uniqu,not_null]
