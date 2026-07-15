@@ -31,7 +31,7 @@ combined as (
 
     full outer join aml a
         on d.txn_date = a.txn_date
-        and d.account__id_id = a.account_id
+        and d.account_id = a.account_id
 
 )
 
