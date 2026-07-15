@@ -7,4 +7,4 @@ select
     amount                     as txn_amount,
     txn_type,
     created_at
-from {{ source('banking', 'transactions_dbt') }}
+from {{ source('banking', 'transactions_dbt_1') }}
