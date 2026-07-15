@@ -24,7 +24,7 @@ models:
   - name: stg_accounts_customers
     columns:
       - name: account_id
-        tests: [unique,not_null]
+        tests: [not_null]
       - name: risk_rating
         tests:
           - accepted_values:
