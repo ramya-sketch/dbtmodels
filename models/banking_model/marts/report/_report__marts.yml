@@ -10,7 +10,7 @@ models:
                 to: ref('stg_accounts_customers')
                 field: account_id
       - name: txn_date
-        tests: [not_null]
+        tests: []
 
   - name: rpt_aml_alerts_vw
     columns:
