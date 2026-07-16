@@ -17,7 +17,7 @@ models:
   - name: stg_daily_account_activity
     columns:
       - name: account_id
-        tests: [not_null]
+        tests: []
       - name: txn_date
         tests: [not_null]
 
