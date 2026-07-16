@@ -16,7 +16,7 @@ customers as (
         customer_id,
         account_id,
         customer_name,
-        risk_rating,
+        risk_rating as RISK RT,
         customer_segment,
         country
     from {{ source('banking', 'customers') }}
