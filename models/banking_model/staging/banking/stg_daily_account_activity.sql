@@ -33,6 +33,8 @@ combined as (
         on d.txn_date = a.txn_date
         and d.account_id = a.account_id
 
+    where d.txn_amount < 10000
+
 )
 
 select *

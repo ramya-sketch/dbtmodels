@@ -6,7 +6,7 @@ with accounts as (
         account_type,
         branch_id,
         currency,
-        status,
+        status, 
         opened_date
     from {{ source('banking', 'accounts') }}
 ),
@@ -16,7 +16,7 @@ customers as (
         customer_id,
         account_id,
         customer_name,
-        risk_rating,
+        risk_rating AS RK_RT,
         customer_segment,
         country
     from {{ source('banking', 'customers') }}
