@@ -24,7 +24,10 @@ models:
   - name: stg_accounts_customers
     columns:
       - name: account_id
-        tests: [not_null]
+        tests:
+          - not_null
+          - unique
+
       - name: risk_rating
         tests:
           - accepted_values:
@@ -34,4 +37,4 @@ models:
         tests:
           - accepted_values:
               arguments:
-                values: ['ACTIVE', 'DORMANT', 'CLOSED','INACTIVE']
+                values: ['ACTIVE', 'DORMANT', 'CLOSED','INACTIVE','SUSPENDED']
