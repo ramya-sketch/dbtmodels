@@ -6,7 +6,7 @@ with accounts as (
         account_type,
         branch_id,
         currency,
-        status,
+        status, 
         opened_date
     from {{ source('banking', 'accounts') }}
 ),
