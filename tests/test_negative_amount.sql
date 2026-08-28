@@ -1,3 +1,3 @@
 select *
 from {{ ref('stg_claims') }}
-where AMOUNT < 1
+where AMOUNT < 2
