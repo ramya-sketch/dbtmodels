@@ -139,11 +139,11 @@ models:
           +database: PRIZM_QA
           +schema: STAGING
           +materialized: view
-          +tags: ['banking', 'staging']
+          +tags: ['banking_dbt', 'staging_dbt']
 
       marts:
         report:
           +database: PRIZM_QA
           +schema: REPORT
           +materialized: table
-          +tags: ['banking', 'report']
+          +tags: ['banking_dbt', 'report_dbt']
