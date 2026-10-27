@@ -5,7 +5,34 @@
     unique_key=['txn_date', 'account_id']
 ) }}
 
-with txn_daily_rollup as (
+with activity_source as (
+    select *
+    from {{ ref('stg_daily_account_activity') }}
+
+    {% if is_incremental() %}
+        where txn_date >= dateadd(
+            day,
+            -3,
+            (
+                select coalesce(max(txn_date), '1900-01-01'::date)
+                from {{ this }}
+            )
+        )
+    {% endif %}
+),
+
+activity as (
+    select *
+    from activity_source
+    where txn_date is not null
+      and account_id is not null
+    qualify row_number() over (
+        partition by txn_date, account_id
+        order by load_ts desc
+    ) = 1
+),
+
+txn_daily_rollup as (
     select
         txn_date,
         account_id,
@@ -24,23 +51,7 @@ with txn_daily_rollup as (
         )
     {% endif %}
 
-    group by 1, 2
-),
-
-activity as (
-    select *
-    from {{ ref('stg_daily_account_activity') }}
-
-    {% if is_incremental() %}
-        where txn_date >= dateadd(
-            day,
-            -3,
-            (
-                select coalesce(max(txn_date), '1900-01-01'::date)
-                from {{ this }}
-            )
-        )
-    {% endif %}
+    group by txn_date, account_id
 )
 
 select
@@ -56,4 +67,4 @@ select
 from activity a
 left join txn_daily_rollup t
     on a.txn_date = t.txn_date
-    and a.account_id = t.account_id
+   and a.account_id = t.account_id
